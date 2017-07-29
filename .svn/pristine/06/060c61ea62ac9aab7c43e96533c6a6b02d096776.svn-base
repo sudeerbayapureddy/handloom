@@ -1,0 +1,189 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the yarn_indent database table.
+ * 
+ */
+@Entity
+@Table(name="yarn_indent")
+@NamedQuery(name="YarnIndent.findAll", query="SELECT y FROM YarnIndent y")
+public class YarnIndent implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idyarn_indent")
+	private int idyarnIndent;
+
+	@Lob
+	@Column(name="billing_address")
+	private String billingAddress;
+
+	private String createdby;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdon;
+
+	private String district;
+
+	@Column(name="idstake_holder_details")
+	private int idstakeHolderDetails;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="indent_date")
+	private Date indentDate;
+
+	@Column(name="indent_number")
+	private String indentNumber;
+
+	private String mandal;
+
+	private int pincode;
+
+	private String updatedby;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updatedon;
+
+	private String village;
+
+	//bi-directional many-to-one association to YarnIndentDetail
+	@OneToMany(mappedBy="yarnIndent")
+	private List<YarnIndentDetail> yarnIndentDetails;
+
+	public YarnIndent() {
+	}
+
+	public int getIdyarnIndent() {
+		return this.idyarnIndent;
+	}
+
+	public void setIdyarnIndent(int idyarnIndent) {
+		this.idyarnIndent = idyarnIndent;
+	}
+
+	public String getBillingAddress() {
+		return this.billingAddress;
+	}
+
+	public void setBillingAddress(String billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+
+	public String getCreatedby() {
+		return this.createdby;
+	}
+
+	public void setCreatedby(String createdby) {
+		this.createdby = createdby;
+	}
+
+	public Date getCreatedon() {
+		return this.createdon;
+	}
+
+	public void setCreatedon(Date createdon) {
+		this.createdon = createdon;
+	}
+
+	public String getDistrict() {
+		return this.district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public int getIdstakeHolderDetails() {
+		return this.idstakeHolderDetails;
+	}
+
+	public void setIdstakeHolderDetails(int idstakeHolderDetails) {
+		this.idstakeHolderDetails = idstakeHolderDetails;
+	}
+
+	public Date getIndentDate() {
+		return this.indentDate;
+	}
+
+	public void setIndentDate(Date indentDate) {
+		this.indentDate = indentDate;
+	}
+
+	public String getIndentNumber() {
+		return this.indentNumber;
+	}
+
+	public void setIndentNumber(String indentNumber) {
+		this.indentNumber = indentNumber;
+	}
+
+	public String getMandal() {
+		return this.mandal;
+	}
+
+	public void setMandal(String mandal) {
+		this.mandal = mandal;
+	}
+
+	public int getPincode() {
+		return this.pincode;
+	}
+
+	public void setPincode(int pincode) {
+		this.pincode = pincode;
+	}
+
+	public String getUpdatedby() {
+		return this.updatedby;
+	}
+
+	public void setUpdatedby(String updatedby) {
+		this.updatedby = updatedby;
+	}
+
+	public Date getUpdatedon() {
+		return this.updatedon;
+	}
+
+	public void setUpdatedon(Date updatedon) {
+		this.updatedon = updatedon;
+	}
+
+	public String getVillage() {
+		return this.village;
+	}
+
+	public void setVillage(String village) {
+		this.village = village;
+	}
+
+	public List<YarnIndentDetail> getYarnIndentDetails() {
+		return this.yarnIndentDetails;
+	}
+
+	public void setYarnIndentDetails(List<YarnIndentDetail> yarnIndentDetails) {
+		this.yarnIndentDetails = yarnIndentDetails;
+	}
+
+	public YarnIndentDetail addYarnIndentDetail(YarnIndentDetail yarnIndentDetail) {
+		getYarnIndentDetails().add(yarnIndentDetail);
+		yarnIndentDetail.setYarnIndent(this);
+
+		return yarnIndentDetail;
+	}
+
+	public YarnIndentDetail removeYarnIndentDetail(YarnIndentDetail yarnIndentDetail) {
+		getYarnIndentDetails().remove(yarnIndentDetail);
+		yarnIndentDetail.setYarnIndent(null);
+
+		return yarnIndentDetail;
+	}
+
+}

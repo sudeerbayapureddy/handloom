@@ -1,0 +1,18 @@
+/**
+ * 
+ */
+package com.karvy.handloom.stakeholder.service;
+
+import java.math.BigInteger;
+
+import com.karvy.handloom.entity.LoomDetails;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+public interface StakeHolderService {
+
+	LoomDetails getLoomDetails(BigInteger loomId);
+
+}

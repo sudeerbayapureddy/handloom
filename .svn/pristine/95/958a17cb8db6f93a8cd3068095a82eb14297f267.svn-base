@@ -1,0 +1,135 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the hs_villages_master database table.
+ * 
+ */
+@Entity
+@Table(name="hs_villages_master")
+@NamedQuery(name="VillagesMaster.findAll", query="SELECT h FROM VillagesMaster h")
+public class VillagesMaster implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int village_Id;
+
+	private String created_By;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created_Date;
+
+	private String modified_By;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date modified_Date;
+
+	private String village_Code;
+
+	private String village_Name;
+
+	//bi-directional many-to-one association to HsAddress
+	@OneToMany(mappedBy="hsVillagesMaster")
+	private List<Address> hsAddresses;
+
+	//bi-directional many-to-one association to HsMandalsMaster
+	@ManyToOne
+	@JoinColumn(name="Village_Mandal_Id")
+	private MandalsMaster hsMandalsMaster;
+
+	public VillagesMaster() {
+	}
+
+	public int getVillage_Id() {
+		return this.village_Id;
+	}
+
+	public void setVillage_Id(int village_Id) {
+		this.village_Id = village_Id;
+	}
+
+	public String getCreated_By() {
+		return this.created_By;
+	}
+
+	public void setCreated_By(String created_By) {
+		this.created_By = created_By;
+	}
+
+	public Date getCreated_Date() {
+		return this.created_Date;
+	}
+
+	public void setCreated_Date(Date created_Date) {
+		this.created_Date = created_Date;
+	}
+
+	public String getModified_By() {
+		return this.modified_By;
+	}
+
+	public void setModified_By(String modified_By) {
+		this.modified_By = modified_By;
+	}
+
+	public Date getModified_Date() {
+		return this.modified_Date;
+	}
+
+	public void setModified_Date(Date modified_Date) {
+		this.modified_Date = modified_Date;
+	}
+
+	public String getVillage_Code() {
+		return this.village_Code;
+	}
+
+	public void setVillage_Code(String village_Code) {
+		this.village_Code = village_Code;
+	}
+
+	public String getVillage_Name() {
+		return this.village_Name;
+	}
+
+	public void setVillage_Name(String village_Name) {
+		this.village_Name = village_Name;
+	}
+
+	public List<Address> getHsAddresses() {
+		return this.hsAddresses;
+	}
+
+	public void setHsAddresses(List<Address> hsAddresses) {
+		this.hsAddresses = hsAddresses;
+	}
+
+	public Address addHsAddress(Address hsAddress) {
+		getHsAddresses().add(hsAddress);
+		hsAddress.setHsVillagesMaster(this);
+
+		return hsAddress;
+	}
+
+	public Address removeHsAddress(Address hsAddress) {
+		getHsAddresses().remove(hsAddress);
+		hsAddress.setHsVillagesMaster(null);
+
+		return hsAddress;
+	}
+
+	public MandalsMaster getHsMandalsMaster() {
+		return this.hsMandalsMaster;
+	}
+
+	public void setHsMandalsMaster(MandalsMaster hsMandalsMaster) {
+		this.hsMandalsMaster = hsMandalsMaster;
+	}
+
+}

@@ -1,0 +1,160 @@
+package com.karvy.handloom.common.util;
+
+import java.io.Serializable;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
+import org.hibernate.stat.Statistics;
+import org.hibernate.transform.Transformers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+/**
+ * @author ravi.banala
+ *
+ */
+@Repository
+public class HibernateUtil {
+
+	
+	private static final Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
+
+	
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	
+	public <T> Serializable dynamicCreate(final T entity) {
+		logger.info("HibernateUtil dynamicCreate  {} ", entity);
+		return sessionFactory.getCurrentSession().save(entity);
+	}
+
+	
+	public void flushAndClear() {
+		logger.info("HibernateUtil flushAndClear");
+		sessionFactory.getCurrentSession().flush();
+		sessionFactory.getCurrentSession().clear();
+	}
+
+	
+	public void rollbackTransaction() {
+		logger.info("HibernateUtil sessionFactory()  ");
+		sessionFactory.getCurrentSession().getTransaction().rollback();
+	}
+
+	
+	public Session getHibernateCurrentSession() {
+		logger.info("HibernateUtil getCurrentSession()");
+		return sessionFactory.getCurrentSession();
+	}
+
+	
+	public Transaction getHibernateTransaction() {
+		logger.info("HibernateUtil getTransaction()  ");
+		return sessionFactory.getCurrentSession().getTransaction();
+	}
+
+
+	public <T> Serializable create(final T entity) {
+		logger.info("HibernateUtil create or save {} ", entity);
+		return sessionFactory.getCurrentSession().save(entity);
+	}
+
+	
+	public <T> void saveORUpdate(final T entity) {
+		logger.info("HibernateUtil saveORUpdate {} ", entity);
+		sessionFactory.getCurrentSession().saveOrUpdate(entity);
+		sessionFactory.getCurrentSession().flush();
+		sessionFactory.getCurrentSession().clear();
+	}
+
+	
+	public <T> T update(final T entity) {
+		logger.info("HibernateUtil update  {} ", entity);
+		sessionFactory.getCurrentSession().update(entity);
+		sessionFactory.getCurrentSession().flush();
+		sessionFactory.getCurrentSession().clear();
+		return entity;
+	}
+
+	
+	public <T> void delete(final T entity) {
+		logger.info("HibernateUtil delete  {} ", entity);
+		sessionFactory.getCurrentSession().delete(entity);
+	}
+
+	
+	public <T> void delete(Serializable id, Class<T> entityClass) {
+		T entity = fetchById(id, entityClass);
+		delete(entity);
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	public <T> List<T> fetchAll(Class<T> entityClass) {
+		logger.info("HibernateUtil unchecked fetchAll  {} ", entityClass);
+		return sessionFactory.getCurrentSession().createQuery("FROM " + entityClass.getName()).setCacheable(true)
+				.list();
+	}
+
+	
+	@SuppressWarnings("rawtypes")
+	public <T> List fetchAll(String query) {
+		logger.info("HibernateUtil rawtypes fetchAll  {} ", query);
+		return sessionFactory.getCurrentSession().createSQLQuery(query).setCacheable(true).list();
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	public <T> T fetchById(Serializable id, Class<T> entityClass) {
+
+		logger.info("HibernateUtil id {} {} ", id, entityClass);
+
+		Statistics stats = sessionFactory.getStatistics();
+		logger.info("stats {} ", stats);
+	return (T) sessionFactory.getCurrentSession().load(entityClass, id);
+	}
+
+	
+	public Criteria createEntityCriteria(Class<?> entityClass) {
+		logger.info("HibernateUtil createEntityCriteria {} ", entityClass);
+		return sessionFactory.getCurrentSession().createCriteria(entityClass);
+	}
+
+	
+	public String getMaxValueByColumn(Class<?> entityClass, String columnName) {
+		logger.info("HibernateUtil getMaxValueByColumn {} {} ", entityClass, columnName);
+
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(entityClass);
+
+		criteria.setProjection(Projections.max(columnName));
+		if(criteria.list().get(0) != null)
+			return criteria.list().get(0).toString();
+		return (String) criteria.list().get(0);
+			
+	}
+
+	
+	public Criteria createEntityCriteriaByAlias(Class<?> entityClass, String aliasName) {
+		logger.info("HibernateUtil createEntityCriteria {} ", entityClass);
+		return sessionFactory.getCurrentSession().createCriteria(entityClass, aliasName);
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public <T> List<T> getcolumnsByClass(Class<?> entityClass, String columnName,String columnNameTwo) {
+        logger.info("HibernateUtil getMaxValueByColumn {} {} ", entityClass, columnName);
+      return  sessionFactory.getCurrentSession().createCriteria(entityClass)
+        .setProjection(
+				Projections.projectionList().add(Projections.property(columnName), columnName)
+				.add(Projections.property(columnNameTwo), columnNameTwo))
+        .setResultTransformer(Transformers.aliasToBean(entityClass)).list();
+                        
+}
+}

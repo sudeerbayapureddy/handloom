@@ -1,0 +1,8 @@
+#Login
+NotEmpty.loginForm.username=Please enter valid username
+#NotEmpty.loginForm.password=Password from properties file
+
+login.submitButton=Login
+
+#capcha Error
+lable.ErrorCaptcha=Please enter the valid captcha

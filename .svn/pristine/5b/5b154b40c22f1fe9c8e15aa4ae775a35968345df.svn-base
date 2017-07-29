@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+package com.karvy.handloom.signup.service.impl;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
+import com.karvy.handloom.signup.service.SignUPService;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Service
+@Transactional
+public class SignUPServiceImpl implements SignUPService{
+
+}

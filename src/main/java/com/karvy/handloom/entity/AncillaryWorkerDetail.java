@@ -1,0 +1,70 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * The persistent class for the hs_ancillary_worker_details database table.
+ * 
+ * @author sateesh.jangam
+ */
+@Entity
+@Table(name = "hs_ancillary_worker_details")
+@NamedQuery(name = "AncillaryWorkerDetail.findAll", query = "SELECT a FROM AncillaryWorkerDetail a")
+@Getter
+@Setter
+public class AncillaryWorkerDetail extends PseudoColumns implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "AWD_Id")
+	private Integer awdId;
+
+	@Column(name = "AWD_Aadhar_No")
+	private BigInteger awdAadharNo;
+
+	@Column(name = "AWD_Designation")
+	private String awdDesignation;
+
+	@Column(name = "AWD_Name")
+	private String awdName;
+
+	// bi-directional many-to-one association to BankBranch
+	@ManyToOne
+	@Cascade({CascadeType.SAVE_UPDATE})
+	@JoinColumn(name="AWD_BD_Id")
+	private BankDetails hsBankDetails;
+
+	// bi-directional many-to-one association to Address
+	@ManyToOne
+	@JoinColumn(name = "AWD_Address_Id")
+	private Address hsAddress;
+
+	// bi-directional many-to-one association to AncillaryWorkersMapping
+	@OneToMany(mappedBy = "hsAncillaryWorkerDetails")
+	@Cascade({CascadeType.SAVE_UPDATE})
+	private List<AncillaryWorkersMapping> hsAncillaryWorkersMappings;
+	
+	@Transient
+	private Integer loomId;
+}

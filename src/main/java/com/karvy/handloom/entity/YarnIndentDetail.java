@@ -1,0 +1,50 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
+
+
+/**
+ * The persistent class for the hs_yarn_indent_details database table.
+ * @author sateesh.jangam
+ */
+@Entity
+@Table(name="hs_yarn_indent_details")
+@NamedQuery(name="YarnIndentDetail.findAll", query="SELECT y FROM YarnIndentDetail y")
+@Getter
+@Setter
+public class YarnIndentDetail extends PseudoColumns implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="YID_Id")
+	private Integer yidId;
+
+	@Column(name="YID_Loom_Barcode")
+	private String yidLoomBarcode;
+
+	@Column(name="YID_Quantity")
+	private BigDecimal yidQuantity;
+
+	@Column(name="YID_Subsidy_Eligibility_Qty")
+	private BigDecimal yidSubsidyEligibilityQty;
+
+	//bi-directional many-to-one association to YarnIndent
+	@ManyToOne
+	@JoinColumn(name="YID_Indent_Id")
+	private YarnIndent hsYarnIndent;
+}

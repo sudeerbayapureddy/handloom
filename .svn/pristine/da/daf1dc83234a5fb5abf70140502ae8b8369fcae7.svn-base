@@ -1,0 +1,41 @@
+#Database related properties
+database.driverClass=com.mysql.jdbc.Driver
+database.url=jdbc:mysql://192.168.84.6:3306/ts_handlooms?autoReconnect=true
+database.username=mysql
+database.password=Karvy@123
+
+#Hibernate related properties
+hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+#hibernate.hbm2ddl.auto=update
+hibernate.show_sql=true
+hibernate.format_sql=true
+
+#Connection pool related properties
+connection.acquireIncrement=2
+connection.minPoolSize=20
+connection.maxPoolSize=50
+connection.maxIdleTime=600
+
+  
+#Mail Related properties
+mail.hostIpAddress=192.168.84.23
+mail.hostPortNumber=25
+mail.maillId=ravi.banala@karvy.com
+mail.mailPassword=Pravanvi@07
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,112 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the hs_bank_master database table.
+ * 
+ */
+@Entity
+@Table(name="hs_bank_master")
+@NamedQuery(name="BankMaster.findAll", query="SELECT h FROM BankMaster h")
+public class BankMaster implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int bank_Id;
+
+	private String bank_Name;
+
+	private String created_By;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created_Date;
+
+	private String modified_By;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date modified_Date;
+
+	//bi-directional many-to-one association to HsBankBranch
+	@OneToMany(mappedBy="hsBankMaster")
+	private List<BankBranch> hsBankBranches;
+
+	public BankMaster() {
+	}
+
+	public int getBank_Id() {
+		return this.bank_Id;
+	}
+
+	public void setBank_Id(int bank_Id) {
+		this.bank_Id = bank_Id;
+	}
+
+	public String getBank_Name() {
+		return this.bank_Name;
+	}
+
+	public void setBank_Name(String bank_Name) {
+		this.bank_Name = bank_Name;
+	}
+
+	public String getCreated_By() {
+		return this.created_By;
+	}
+
+	public void setCreated_By(String created_By) {
+		this.created_By = created_By;
+	}
+
+	public Date getCreated_Date() {
+		return this.created_Date;
+	}
+
+	public void setCreated_Date(Date created_Date) {
+		this.created_Date = created_Date;
+	}
+
+	public String getModified_By() {
+		return this.modified_By;
+	}
+
+	public void setModified_By(String modified_By) {
+		this.modified_By = modified_By;
+	}
+
+	public Date getModified_Date() {
+		return this.modified_Date;
+	}
+
+	public void setModified_Date(Date modified_Date) {
+		this.modified_Date = modified_Date;
+	}
+
+	public List<BankBranch> getHsBankBranches() {
+		return this.hsBankBranches;
+	}
+
+	public void setHsBankBranches(List<BankBranch> hsBankBranches) {
+		this.hsBankBranches = hsBankBranches;
+	}
+
+	public BankBranch addHsBankBranch(BankBranch hsBankBranch) {
+		getHsBankBranches().add(hsBankBranch);
+		hsBankBranch.setHsBankMaster(this);
+
+		return hsBankBranch;
+	}
+
+	public BankBranch removeHsBankBranch(BankBranch hsBankBranch) {
+		getHsBankBranches().remove(hsBankBranch);
+		hsBankBranch.setHsBankMaster(null);
+
+		return hsBankBranch;
+	}
+
+}

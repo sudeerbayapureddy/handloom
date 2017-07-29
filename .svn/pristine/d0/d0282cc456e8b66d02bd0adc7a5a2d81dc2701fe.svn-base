@@ -1,0 +1,46 @@
+/**
+ * 
+ */
+package com.karvy.handloom.stakeholder.dao;
+
+import java.math.BigInteger;
+import java.util.List;
+
+import com.karvy.handloom.common.dto.LoomDetailsDTO;
+import com.karvy.handloom.common.dto.YarnIndentDetailDTO;
+import com.karvy.handloom.entity.BankMaster;
+import com.karvy.handloom.entity.DistrictsMaster;
+import com.karvy.handloom.entity.LoomDetails;
+import com.karvy.handloom.entity.MandalsMaster;
+import com.karvy.handloom.entity.VillagesMaster;
+import com.karvy.handloom.entity.YarnIndent;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+public interface StakeHolderDAO {
+
+	LoomDetailsDTO getLoomDetails(BigInteger loomId);
+	
+	public List<BankMaster> getBankMasterDetails();
+	
+	public List<DistrictsMaster> getDistrictDetails();
+	
+	public List<MandalsMaster> getMandalDetails(int distId);
+	
+	public List<VillagesMaster> getVillageDetails(int manId);
+	
+	public LoomDetails getLoomDetailsByAadhar(String aadharNo);
+
+	String saveIndentDetails(YarnIndent indent);
+
+	List<YarnIndent> getIndentList(Integer shId);
+
+	List<YarnIndentDetailDTO> getYarnIndentDetail(String indentId);
+
+	List<String> getYarnType(List<BigInteger> barCodes);
+
+
+
+}

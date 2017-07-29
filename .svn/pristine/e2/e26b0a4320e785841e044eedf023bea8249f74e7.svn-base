@@ -1,0 +1,139 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the ancillary_worker_details database table.
+ * 
+ */
+@Entity
+@Table(name="ancillary_worker_details")
+@NamedQuery(name="AncillaryWorkerDetail.findAll", query="SELECT a FROM AncillaryWorkerDetail a")
+public class AncillaryWorkerDetail implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idancillary_worker_details")
+	private int idancillaryWorkerDetails;
+
+	@Column(name="aadhaar_number")
+	private String aadhaarNumber;
+
+	@Column(name="bank_account_number")
+	private String bankAccountNumber;
+
+	@Column(name="bank_name")
+	private String bankName;
+
+	private String createdby;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdon;
+
+	private String designation;
+
+	private String ifsc;
+
+	private String name;
+
+	private String updatedby;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updatedon;
+
+	public AncillaryWorkerDetail() {
+	}
+
+	public int getIdancillaryWorkerDetails() {
+		return this.idancillaryWorkerDetails;
+	}
+
+	public void setIdancillaryWorkerDetails(int idancillaryWorkerDetails) {
+		this.idancillaryWorkerDetails = idancillaryWorkerDetails;
+	}
+
+	public String getAadhaarNumber() {
+		return this.aadhaarNumber;
+	}
+
+	public void setAadhaarNumber(String aadhaarNumber) {
+		this.aadhaarNumber = aadhaarNumber;
+	}
+
+	public String getBankAccountNumber() {
+		return this.bankAccountNumber;
+	}
+
+	public void setBankAccountNumber(String bankAccountNumber) {
+		this.bankAccountNumber = bankAccountNumber;
+	}
+
+	public String getBankName() {
+		return this.bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
+	public String getCreatedby() {
+		return this.createdby;
+	}
+
+	public void setCreatedby(String createdby) {
+		this.createdby = createdby;
+	}
+
+	public Date getCreatedon() {
+		return this.createdon;
+	}
+
+	public void setCreatedon(Date createdon) {
+		this.createdon = createdon;
+	}
+
+	public String getDesignation() {
+		return this.designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public String getIfsc() {
+		return this.ifsc;
+	}
+
+	public void setIfsc(String ifsc) {
+		this.ifsc = ifsc;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getUpdatedby() {
+		return this.updatedby;
+	}
+
+	public void setUpdatedby(String updatedby) {
+		this.updatedby = updatedby;
+	}
+
+	public Date getUpdatedon() {
+		return this.updatedon;
+	}
+
+	public void setUpdatedon(Date updatedon) {
+		this.updatedon = updatedon;
+	}
+
+}

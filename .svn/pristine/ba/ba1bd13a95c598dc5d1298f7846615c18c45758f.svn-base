@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package com.karvy.handloom.ad.service;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+public interface ADApprovalFlowService {
+
+}

@@ -1,0 +1,161 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the hs_mandals_master database table.
+ * 
+ */
+@Entity
+@Table(name="hs_mandals_master")
+@NamedQuery(name="MandalsMaster.findAll", query="SELECT h FROM MandalsMaster h")
+public class MandalsMaster implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int mandal_Id;
+
+	private String created_By;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created_Date;
+
+	private String mandal_Code;
+
+	private String mandal_Name;
+
+	private String modified_By;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date modified_Date;
+
+	//bi-directional many-to-one association to HsAddress
+	@OneToMany(mappedBy="hsMandalsMaster")
+	private List<Address> hsAddresses;
+
+	//bi-directional many-to-one association to HsDistrictsMaster
+	@ManyToOne
+	@JoinColumn(name="Mandal_District_Id")
+	private DistrictsMaster hsDistrictsMaster;
+
+	//bi-directional many-to-one association to HsVillagesMaster
+	@OneToMany(mappedBy="hsMandalsMaster")
+	private List<VillagesMaster> hsVillagesMasters;
+
+	public MandalsMaster() {
+	}
+
+	public int getMandal_Id() {
+		return this.mandal_Id;
+	}
+
+	public void setMandal_Id(int mandal_Id) {
+		this.mandal_Id = mandal_Id;
+	}
+
+	public String getCreated_By() {
+		return this.created_By;
+	}
+
+	public void setCreated_By(String created_By) {
+		this.created_By = created_By;
+	}
+
+	public Date getCreated_Date() {
+		return this.created_Date;
+	}
+
+	public void setCreated_Date(Date created_Date) {
+		this.created_Date = created_Date;
+	}
+
+	public String getMandal_Code() {
+		return this.mandal_Code;
+	}
+
+	public void setMandal_Code(String mandal_Code) {
+		this.mandal_Code = mandal_Code;
+	}
+
+	public String getMandal_Name() {
+		return this.mandal_Name;
+	}
+
+	public void setMandal_Name(String mandal_Name) {
+		this.mandal_Name = mandal_Name;
+	}
+
+	public String getModified_By() {
+		return this.modified_By;
+	}
+
+	public void setModified_By(String modified_By) {
+		this.modified_By = modified_By;
+	}
+
+	public Date getModified_Date() {
+		return this.modified_Date;
+	}
+
+	public void setModified_Date(Date modified_Date) {
+		this.modified_Date = modified_Date;
+	}
+
+	public List<Address> getHsAddresses() {
+		return this.hsAddresses;
+	}
+
+	public void setHsAddresses(List<Address> hsAddresses) {
+		this.hsAddresses = hsAddresses;
+	}
+
+	public Address addHsAddress(Address hsAddress) {
+		getHsAddresses().add(hsAddress);
+		hsAddress.setHsMandalsMaster(this);
+
+		return hsAddress;
+	}
+
+	public Address removeHsAddress(Address hsAddress) {
+		getHsAddresses().remove(hsAddress);
+		hsAddress.setHsMandalsMaster(null);
+
+		return hsAddress;
+	}
+
+	public DistrictsMaster getHsDistrictsMaster() {
+		return this.hsDistrictsMaster;
+	}
+
+	public void setHsDistrictsMaster(DistrictsMaster hsDistrictsMaster) {
+		this.hsDistrictsMaster = hsDistrictsMaster;
+	}
+
+	public List<VillagesMaster> getHsVillagesMasters() {
+		return this.hsVillagesMasters;
+	}
+
+	public void setHsVillagesMasters(List<VillagesMaster> hsVillagesMasters) {
+		this.hsVillagesMasters = hsVillagesMasters;
+	}
+
+	public VillagesMaster addHsVillagesMaster(VillagesMaster hsVillagesMaster) {
+		getHsVillagesMasters().add(hsVillagesMaster);
+		hsVillagesMaster.setHsMandalsMaster(this);
+
+		return hsVillagesMaster;
+	}
+
+	public VillagesMaster removeHsVillagesMaster(VillagesMaster hsVillagesMaster) {
+		getHsVillagesMasters().remove(hsVillagesMaster);
+		hsVillagesMaster.setHsMandalsMaster(null);
+
+		return hsVillagesMaster;
+	}
+
+}

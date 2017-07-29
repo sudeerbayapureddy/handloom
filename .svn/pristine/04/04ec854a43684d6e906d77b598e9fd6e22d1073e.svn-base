@@ -1,0 +1,24 @@
+/**
+ * 
+ */
+package com.karvy.handloom.ad.service;
+
+import java.util.List;
+
+import com.karvy.handloom.admin.bean.ADApprovalBean;
+import com.karvy.handloom.admin.bean.RegistrationApprovalBean;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+public interface ADApprovalFlowService {
+
+	 List<ADApprovalBean> getADGridDetails(String username, String roleName);
+
+	void registrationApproval(String userName, String roleName, String id, String decision,String comments);
+
+	RegistrationApprovalBean registrationApprovalView(String id);
+
+
+}

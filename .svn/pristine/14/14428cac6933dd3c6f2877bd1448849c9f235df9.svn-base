@@ -1,0 +1,50 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import lombok.Getter;
+import lombok.Setter;
+
+
+/**
+ * The persistent class for the hs_signup database table.
+ * @author sateesh.jangam
+ */
+@Entity
+@Table(name="hs_otp_details")
+@NamedQuery(name="OTPDetails.findAll", query="SELECT o FROM OTPDetails o")
+@Getter
+@Setter
+public class OTPDetails implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="OTP_Id")
+	private Integer otpId;
+
+	@Column(name="OTP_Code")
+	private BigInteger otpCode;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "OTP_Updated_Date")
+	private Date otpUpdatedDate;
+
+	//bi-directional many-to-one association to User
+	@OneToOne(mappedBy="otpDetails",cascade=CascadeType.ALL)
+	private SignUp signUp;
+}

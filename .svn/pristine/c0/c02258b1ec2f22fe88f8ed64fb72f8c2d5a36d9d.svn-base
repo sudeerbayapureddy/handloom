@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+package com.karvy.handloom.ad.service.impl;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
+import com.karvy.handloom.ad.service.ADApprovalFlowService;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Service
+@Transactional
+public class ADApprovalFlowServiceImpl implements ADApprovalFlowService{
+
+}

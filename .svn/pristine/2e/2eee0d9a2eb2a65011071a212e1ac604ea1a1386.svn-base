@@ -1,0 +1,71 @@
+ <div class="left side-menu">
+                <div class="sidebar-inner slimscrollleft">
+                    <div id="sidebar-menu">
+                        <ul>
+                            <li>
+                                <a href="loginSuccess" class="waves-effect"><i class="fa fa-tachometer"></i><span> Dashboard </span></a>
+                            </li>
+
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-pencil-square-o"></i><span> Application Registration </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="registration">Application Submission</a></li>
+                                    <li><a href="reg-approvals.html">Application Approval</a></li>
+                                    <li><a href="#">Status</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-snowflake-o"></i> Material Request </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="yarnindent">Yarn Indent</a></li>
+                                    <li><a href="yarn-receipt.html">Yarn Receipt</a></li>
+                                    <li><a href="product-info.html">Product Information</a></li>
+                                    <li><a href="subsidy-distribution.html">Payment</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-cog"></i><span> Setup &amp; Configuration </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Subsidy Slab</a></li>
+                                    <li><a href="#">Thrift Society</a></li>
+                                    <li><a href="#">Material Wastage</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-users"></i><span> Masters </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Applicant</a></li>
+                                    <li><a href="#">AD</a></li>
+                                    <li><a href="#">Bank Master</a></li>
+                                    <li><a href="#">Stake Holder Type</a></li>
+                                    <li><a href="#">Ancillary Type</a></li>
+                                    <li><a href="#">Barcode</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-wrench"></i><span> Utilities </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Role Creation</a></li>
+                                    <li><a href="#">User Creation</a></li>
+                                    <li><a href="#">Manage Roles</a></li>
+                                    <li><a href="#">Log Details</a></li>
+                                </ul>
+                            </li>
+                            
+                             <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-tasks" aria-hidden="true"></i><span> Tasks </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="./regApprovalGrid">Registration Approval Grid</a></li>
+                                  <!--  <li><a href="#"></a></li>
+                                    <li><a href="#"></a></li> -->
+                                </ul>
+                            </li>
+                           <!-- <li>
+                                <a href="#" class="waves-effect"><i class="md md-event"></i><span> Calendar </span></a>
+                            </li>-->
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>

@@ -1,0 +1,209 @@
+      <jsp:include page="../includes/includes.jsp"></jsp:include>   
+          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+<script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.js"></script> 
+          <link rel="stylesheet" type="text/css" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.css">
+           <script>
+        var app=angular.module('app_Indent', []);
+           app.controller('indentController',  function($scope,$http) {
+        	   $scope.looms=[
+        		   {
+        			   id:'1',
+        			   name:'3433'
+        		   },
+        		   {
+        			   id:'2',
+        			   name:'34331'
+        		   },
+        		   {
+        			   id:'3',
+        			   name:'34332'
+        		   }
+        	   ];
+         	  
+        	   
+        	   console.log(  $scope.looms)
+        	   $scope.getLoomdetails=function(element,index)
+               {
+        		   console.log(  $scope.looms)
+            	   alert(element)
+            	   $http({
+                       method: 'GET',
+                       url: 'getLoomdetails',
+                       params: {loomId:element }
+               }).then(function successCallback(response) {
+             	  	console.log(response);
+             	  	$scope.loomDetails=response.data;
+            	 
+               
+               }, function errorCallback(response) {
+                     //return $scope.nextTab();
+               });
+      
+            	   
+            	   
+               };
+               
+               
+               
+               
+               $scope.yarnIndent={
+            		   yarnSHId : '',
+            		   hsYarnIndentDetails : $scope.hsYarnIndentDetails		  
+        	   }; 
+               
+               $scope.hsYarnIndentDetails =[{
+            		   yidLoomBarcode :'',
+        			   yidQuantity : '',
+        			   yidSubsidyEligibilityQty : ''
+        	  }];
+               
+               $scope.loomList=[{
+           		
+        	   }];
+               $scope.addLoom =function(){
+               	$scope.loomList.push({
+               		name:''
+               	});
+               }
+               
+               $scope.addIntentRow = function(index){
+            	   alert("s")
+            	   $scope.hsYarnIndentDetails.push({
+            		   yidLoomBarcode :'',
+        			   yidQuantity : '',
+        			   yidSubsidyEligibilityQty : ''
+            	   });
+               }
+               
+           });
+           
+          
+           </script>
+                
+           
+           
+            <div class="content-page">
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="pull-left page-title">Welcome to Telangana Handlooms !</h4>
+                                <ol class="breadcrumb pull-right">
+                                    <!--<li><a href="#">Telangana Handlooms</a></li>-->
+                                    <li class="active">Dashboard</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12">
+                               <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">Yarn Indent</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                         <div class="row m-t-20">
+                                              <div class="col-md-12">
+                                                 <form class="form-horizontal">
+                                                    <fieldset>
+                                                      <div class="row">
+                                                         <div class="col-md-6">
+                                                        <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Stake Holder</label>
+                                                              <div class="col-md-7">
+                                                                <label class="form-control">Master Weaver</label>
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Aadhaar Number</label>
+                                                              <div class="col-md-7">
+                                                               <label class="form-control">234556786543</label>
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">District</label>
+                                                              <div class="col-md-7">
+                                                               <label class="form-control">Medchal</label>
+                                                              </div>
+                                                            </div>
+                                                           
+                                                            
+                                                         </div>
+                                                         <div class="col-md-6">
+                                                          <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Mandal</label>
+                                                              <div class="col-md-7">
+                                                               <label class="form-control">Uppal</label>
+                                                              </div>
+                                                            </div>
+                                                         <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Village</label>
+                                                              <div class="col-md-7">
+                                                               <label class="form-control">Boduppal</label>
+                                                              </div>
+                                                            </div>
+                                                           
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Address</label>
+                                                              <div class="col-md-7">
+                                                               <label class="form-control">Uppal, Medchal District, Telangana</label>
+                                                              </div>
+                                                            </div>
+                                                            
+                                                            
+                                                         </div>
+                                                      </div>
+                                                    </fieldset>
+                                                 </form>
+                                              </div>
+                                              <div class="col-md-12 m-t-20" ng-app="app_Indent" ng-controller="indentController">
+                                                 <div class="table table-responsive">
+                                                    <table class="table table-bordered m-b-0">
+                                                        <thead>
+                                                          <tr>
+                                                            <th>Loom Code</th>
+                                                            <th>Type of Yarn</th>
+                                                            <th>Indent Quantity</th>
+                                                            <th>Subsidy Eligibility Quantity</th>
+                                                            <td>Add</td>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr>
+                                                            <td>
+                                                            
+                                                            <select ng-model="yarnIndent.hsYarnIndentDetails.yidLoomBarcode"  ng-change="getLoomdetails(yarnIndent.hsYarnIndentDetails.yidLoomBarcode)">
+                                                            <option ng-repeat="loom in looms" value="{{loom.id}}"  >{{loom.name}}</option>
+                                                            </select>
+                                                          <!--  <select class="form-control" ng-model="refDetails.employeeDetailsId"
+											ng-options="value.name as value.id for value in looms track by id" ng-change="getLoomdetails({{refDetails.employeeDetailsId}})" required>
+											
+											</select> -->
+                                                            </td>
+                                                            <td>{{loomDetails.ldYarnType}}</td>
+                                                            <td><input type="text" /></td>
+                                                            <td>{{loomDetails.ldSubsidyEligibilityQty}}</td>
+                                                            <td><button ng-click="addIntentRow($index)" value="Add">ADD</button></td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                 </div>
+                                              </div>
+                                              <div class="col-md-12">
+                                                  <hr />
+                                                  <div class="pull-right">
+                                                     <button id="button1id" name="button1id" class="btn btn-sm pink">Submit</button>
+                                                     <button id="button2id" name="button2id" class="btn btn-sm pink">Cancel</button>
+                                                  </div>
+                                                </div> 
+                                            </div>
+                                    </div>
+                               </div>
+                           </div>
+                        </div>
+                    </div>    
+                </div> 
+
+            </div>
+        
+       

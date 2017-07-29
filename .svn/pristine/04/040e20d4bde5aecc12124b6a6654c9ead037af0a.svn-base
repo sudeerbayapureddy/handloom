@@ -1,0 +1,76 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
+
+
+/**
+ * The persistent class for the hs_bank_branches database table.
+ * @author sateesh.jangam
+ */
+@Entity
+@Table(name="hs_bank_details")
+@NamedQuery(name="BankDetails.findAll", query="SELECT b FROM BankDetails b")
+@Getter
+@Setter
+public class BankDetails extends PseudoColumns implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="BD_Id")
+	private Integer bdId;
+
+	@Column(name="BD_MICR_Code")
+	private String bdMICRCode;
+
+	@Column(name="BD_Address")
+	private String bdAddress;
+
+	@Column(name="BD_Code")
+	private String branchCode;
+
+	@Column(name="BD_IFSC_Code")
+	private String bdIFSCCode;
+
+	@Column(name="BD_Branch_Name")
+	private String bdBranchName;
+	
+	@Column(name="BD_Account_No")
+	private BigInteger bdAccountNo;
+	
+	@Column(name="BD_Bank_Id")
+	private Integer bdBankId;
+
+	//bi-directional many-to-one association to BankMaster
+	@ManyToOne
+	@JoinColumn(name="BD_Bank_Id", nullable = false,insertable = false,updatable = false)
+	private BankMaster hsBankMaster;
+
+	//bi-directional many-to-one association to StakeHolder
+	@OneToMany(mappedBy="hsBankDetails")
+	private List<StakeHolder> hsStakeHolders;
+
+	//bi-directional many-to-one association to AncillaryWorkerDetail
+	@OneToMany(mappedBy="hsBankDetails")
+	private List<AncillaryWorkerDetail> hsAncillaryWorkerDetails;
+	
+	//bi-directional many-to-one association to LoomDetails
+	@OneToMany(mappedBy="hsBankDetails")
+	private List<LoomDetails> loomDetails;
+}

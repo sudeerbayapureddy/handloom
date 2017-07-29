@@ -1,0 +1,53 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import lombok.Getter;
+import lombok.Setter;
+
+
+/**
+ * The persistent class for the hs_states_master database table.
+ * @author sateesh.jangam
+ */
+@Entity
+@Table(name="hs_states_master")
+@NamedQuery(name="StatesMaster.findAll", query="SELECT s FROM StatesMaster s")
+@Getter
+@Setter
+public class StatesMaster extends PseudoColumns implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="State_Id")
+	private Integer stateId;
+
+	@Column(name="State_Code")
+	private String stateCode;
+
+	@Column(name="State_Name")
+	private String stateName;
+
+	//bi-directional many-to-one association to Address
+	@JsonBackReference
+	@OneToMany(mappedBy="hsStatesMaster")
+	private List<Address> hsAddresses;
+
+	//bi-directional many-to-one association to DistrictsMaster
+	@OneToMany(mappedBy="hsStatesMaster")
+	private List<DistrictsMaster> hsDistrictsMasters;
+}

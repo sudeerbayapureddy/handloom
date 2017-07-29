@@ -1,0 +1,32 @@
+/**
+ * 
+ */
+package com.karvy.handloom.ad.service.impl;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.karvy.handloom.ad.dao.ADApprovalFlowDAO;
+import com.karvy.handloom.ad.service.ADApprovalFlowService;
+import com.karvy.handloom.admin.bean.ADApprovalBean;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Service
+@Transactional
+public class ADApprovalFlowServiceImpl implements ADApprovalFlowService{
+	
+	@Autowired
+	ADApprovalFlowDAO adApprovalFlowDAO;
+	
+	public List<ADApprovalBean> getADGridDetails(String username, String roleName){
+		return adApprovalFlowDAO.getADGridDetails(username,roleName);
+	}
+
+}

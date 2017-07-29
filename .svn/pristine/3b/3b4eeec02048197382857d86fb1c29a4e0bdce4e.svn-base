@@ -1,0 +1,65 @@
+/**
+ * 
+ */
+package com.karvy.handloom.signup.controller;
+
+import java.rmi.RemoteException;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.karvy.handloom.common.bean.RegistrationBean;
+import com.karvy.handloom.constants.Constants_URLPath;
+import com.karvy.handloom.signup.service.SignUPService;
+import com.karvy.handloom.tiles.constants.Constant_Tiles_View;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Controller
+public class SignUPController {
+   
+	private static final Logger logger = LoggerFactory.getLogger(SignUPController.class);
+
+	
+	@Autowired
+	SignUPService signUPService;
+	
+	
+	@RequestMapping(value="/saveRegistrationForm",method=RequestMethod.POST)
+	ModelAndView saveRegistrationForm(HttpServletRequest request){
+		ModelAndView modelandview=null;
+		RegistrationBean registrationBean = new RegistrationBean();
+		registrationBean.setAadharNumber(request.getParameter("aadharNumber"));
+		registrationBean.setEmail(request.getParameter("email"));
+		registrationBean.setMobile(request.getParameter("mobile"));
+		registrationBean.setName(request.getParameter("name"));
+		registrationBean.setPassword(request.getParameter("password"));
+		registrationBean.setRollId(String.valueOf(6));
+			
+		Integer saveRegistrationForm=null;
+		try {
+			saveRegistrationForm = signUPService.saveRegistrationForm(registrationBean,request);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(saveRegistrationForm>=1){
+			modelandview=new ModelAndView("redirect:"+Constants_URLPath.OTP_VERIFICATION_FORM);
+		}else{
+			modelandview=new ModelAndView(Constant_Tiles_View.ERROR_PAGE);
+		}
+		return modelandview;
+		
+	}
+	
+	
+}

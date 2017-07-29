@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+        <title>Telangana Handlooms</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/bootstrap-datepicker.css" rel="stylesheet">
+        <link href="assets/css/core.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/icons.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/material-design-iconic-font.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/components.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/menu.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/responsive.css" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+        <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    </head>
+    <body class="fixed-left">
+        <div id="wrapper">
+            <div class="topbar">
+                <div class="topbar-left">
+                    <div class="text-center" id="logo">
+                        <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="" /></a>
+                    </div>
+                </div>
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="container">
+                        <div class="">
+                            <div class="pull-left">
+                                <button id="bars"  type="button" class="button-menu-mobile open-left">
+                                    <i  class="fa fa-bars"></i>
+                                </button>
+                                <span class="clearfix"></span>
+                            </div>
+                            <form class="navbar-form pull-left" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control search-bar" placeholder="Type here for search...">
+                                </div>
+                                <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
+                            </form>
+
+                            <ul class="nav navbar-nav navbar-right pull-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true">Welcome Admin&nbsp;&nbsp;<img src="assets/images/user.png" alt="user-img" class="img-circle"> </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="javascript:void(0)"><i class="zmdi zmdi-face"></i> Profile</a></li>
+                                        <li><a href="change-password.html"><i class="zmdi zmdi-lock-outline"></i> Change Password</a></li>
+                                        <li><a href="login.html"><i class="zmdi zmdi-power-setting"></i> Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="left side-menu">
+                <div class="sidebar-inner slimscrollleft">
+                    <div id="sidebar-menu">
+                        <ul>
+                            <li>
+                                <a href="index.html" class="waves-effect"><i class="fa fa-tachometer"></i><span> Dashboard </span></a>
+                            </li>
+
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-pencil-square-o"></i><span> Application Registration </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="app-registration.html">Application Submission</a></li>
+                                    <li><a href="reg-approvals.html">Application Approval</a></li>
+                                    <li><a href="#">Status</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-snowflake-o"></i> Material Request </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="yarn-indent.html">Yarn Indent</a></li>
+                                    <li><a href="yarn-receipt.html">Yarn Receipt</a></li>
+                                    <li><a href="product-info.html">Product Information</a></li>
+                                    <li><a href="subsidy-distribution.html">Payment</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-cog"></i><span> Setup &amp; Configuration </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Subsidy Slab</a></li>
+                                    <li><a href="#">Thrift Society</a></li>
+                                    <li><a href="#">Material Wastage</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-users"></i><span> Masters </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Applicant</a></li>
+                                    <li><a href="#">AD</a></li>
+                                    <li><a href="#">Bank Master</a></li>
+                                    <li><a href="#">Stake Holder Type</a></li>
+                                    <li><a href="#">Ancillary Type</a></li>
+                                    <li><a href="#">Barcode</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-wrench"></i><span> Utilities </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Role Creation</a></li>
+                                    <li><a href="#">User Creation</a></li>
+                                    <li><a href="#">Manage Roles</a></li>
+                                    <li><a href="#">Log Details</a></li>
+                                </ul>
+                            </li>
+                           <!-- <li>
+                                <a href="#" class="waves-effect"><i class="md md-event"></i><span> Calendar </span></a>
+                            </li>-->
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+                               
+            <div class="content-page">
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="pull-left page-title">Welcome to Telangana Handlooms !</h4>
+                                <ol class="breadcrumb pull-right">
+                                    <!--<li><a href="#">Telangana Handlooms</a></li>-->
+                                    <li class="active">Dashboard</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12">
+                               <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">Yarn Receipt</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                         <div class="row m-t-20">
+                                            <div class="col-md-12">
+                                                 <form class="form-horizontal">
+                                                    <fieldset>
+                                                      <div class="row">
+                                                         <div class="col-md-6">
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Invoice Number</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="COT5643" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Invoice Date</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="7/9/2017" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Indent Number</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Indent001" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Indent Date</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="7/4/2017" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">District</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Medchal" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Mandal</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Uppal" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Village</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Boduppal" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-6">
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Stake Holder</label>
+                                                              <div class="col-md-7">
+                                                                <select id="selectbasic" name="" class="form-control">
+                                                                  <option value="0">Master Weaver</option>
+                                                                  <option value="1">SHG</option>
+                                                                  <option value="2">Society</option>
+                                                                  <option value="4">Tisco</option>
+                                                                </select>
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Aadhaar Number</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="234556786543" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Name of Weaver</label>
+                                                              <div class="col-md-7">
+                                                                <select id="selectbasic" name="" class="form-control">
+                                                                  <option value="0">Rajesh Kumar</option>
+                                                                  <option value="1">Venkat Vihar</option>
+                                                                  <option value="2">Rohith Sharma</option>
+                                                                </select>
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Address</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Uppal, Medchal District, Telangana" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Loom Mapped</label>
+                                                              <div class="col-md-7">
+                                                                <select id="selectbasic" name="" class="form-control">
+                                                                  <option value="0">BA0001</option>
+                                                                  <option value="1">BA0002</option>
+                                                                  <option value="2">BA0003</option>
+                                                                  <option value="3">BA0004</option>
+                                                                </select>
+                                                              </div>
+                                                            </div>
+                                                            
+                                                         </div>
+                                                      </div>
+                                                    </fieldset>
+                                                 </form>
+                                              </div>
+                                            <div class="col-md-12 m-t-20">
+                                                 <div class="table table-responsive">
+                                                    <table class="table table-bordered m-b-0">
+                                                        <thead>
+                                                          <tr>
+                                                            <th>Type of Yarn</th>
+                                                            <th>Value</th>
+                                                            <th>Quantity</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr>
+                                                            <td>Cotton</td>
+                                                            <td>45,000/-</td>
+                                                            <td>200</td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                 </div>
+                                              </div>
+                                            <div class="col-md-12">
+                                                  <hr />
+                                                  <div class="pull-right">
+                                                     <button id="button1id" name="button1id" class="btn btn-sm pink">Submit</button>
+                                                     <button id="button2id" name="button2id" class="btn btn-sm pink">Cancel</button>
+                                                  </div>
+                                                </div>
+                                         </div>
+                                    </div>
+                               </div>
+                           </div>
+                        </div>
+                    </div>    
+                </div> 
+
+                <footer class="footer text-right">
+                    &copy; 2017 Telangana Handlooms. All rights reserved.
+                </footer>
+            </div>
+        </div>
+        
+        <script>
+            var resizefunc = [];
+        </script>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+         <script src="assets/js/modernizr.min.js"></script>
+        <script src="assets/js/detect.js"></script>
+        <script src="assets/js/fastclick.js"></script>
+        <script src="assets/js/jquery.slimscroll.js"></script>
+        <script src="assets/js/jquery.app.js"></script>
+        <script src="assets/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript">
+            $(document).ready(function () {
+                $('#example1').datepicker({
+                    format: "dd/mm/yyyy"
+                });
+                $('#example2').datepicker({
+                    format: "dd/mm/yyyy"
+                }); 
+            });
+        </script>
+        <script type="text/javascript">
+            $('.btnNext').click(function(){
+              $('.nav-tabs > .active').next('li').find('a').trigger('click');
+            });
+            $('.btnPrevious').click(function(){
+              $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+            });
+        </script>
+    </body>
+</html>

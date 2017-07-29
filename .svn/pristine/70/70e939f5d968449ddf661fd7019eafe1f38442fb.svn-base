@@ -1,0 +1,161 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the hs_districts_master database table.
+ * 
+ */
+@Entity
+@Table(name="hs_districts_master")
+@NamedQuery(name="DistrictsMaster.findAll", query="SELECT h FROM DistrictsMaster h")
+public class DistrictsMaster implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int district_Id;
+
+	private String created_By;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created_Date;
+
+	private String district_Code;
+
+	private String district_Name;
+
+	private String modified_By;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date modified_Date;
+
+	//bi-directional many-to-one association to HsAddress
+	@OneToMany(mappedBy="hsDistrictsMaster")
+	private List<Address> hsAddresses;
+
+	//bi-directional many-to-one association to HsStatesMaster
+	@ManyToOne
+	@JoinColumn(name="District_State_Id")
+	private StatesMaster hsStatesMaster;
+
+	//bi-directional many-to-one association to HsMandalsMaster
+	@OneToMany(mappedBy="hsDistrictsMaster")
+	private List<MandalsMaster> hsMandalsMasters;
+
+	public DistrictsMaster() {
+	}
+
+	public int getDistrict_Id() {
+		return this.district_Id;
+	}
+
+	public void setDistrict_Id(int district_Id) {
+		this.district_Id = district_Id;
+	}
+
+	public String getCreated_By() {
+		return this.created_By;
+	}
+
+	public void setCreated_By(String created_By) {
+		this.created_By = created_By;
+	}
+
+	public Date getCreated_Date() {
+		return this.created_Date;
+	}
+
+	public void setCreated_Date(Date created_Date) {
+		this.created_Date = created_Date;
+	}
+
+	public String getDistrict_Code() {
+		return this.district_Code;
+	}
+
+	public void setDistrict_Code(String district_Code) {
+		this.district_Code = district_Code;
+	}
+
+	public String getDistrict_Name() {
+		return this.district_Name;
+	}
+
+	public void setDistrict_Name(String district_Name) {
+		this.district_Name = district_Name;
+	}
+
+	public String getModified_By() {
+		return this.modified_By;
+	}
+
+	public void setModified_By(String modified_By) {
+		this.modified_By = modified_By;
+	}
+
+	public Date getModified_Date() {
+		return this.modified_Date;
+	}
+
+	public void setModified_Date(Date modified_Date) {
+		this.modified_Date = modified_Date;
+	}
+
+	public List<Address> getHsAddresses() {
+		return this.hsAddresses;
+	}
+
+	public void setHsAddresses(List<Address> hsAddresses) {
+		this.hsAddresses = hsAddresses;
+	}
+
+	public Address addHsAddress(Address hsAddress) {
+		getHsAddresses().add(hsAddress);
+		hsAddress.setHsDistrictsMaster(this);
+
+		return hsAddress;
+	}
+
+	public Address removeHsAddress(Address hsAddress) {
+		getHsAddresses().remove(hsAddress);
+		hsAddress.setHsDistrictsMaster(null);
+
+		return hsAddress;
+	}
+
+	public StatesMaster getHsStatesMaster() {
+		return this.hsStatesMaster;
+	}
+
+	public void setHsStatesMaster(StatesMaster hsStatesMaster) {
+		this.hsStatesMaster = hsStatesMaster;
+	}
+
+	public List<MandalsMaster> getHsMandalsMasters() {
+		return this.hsMandalsMasters;
+	}
+
+	public void setHsMandalsMasters(List<MandalsMaster> hsMandalsMasters) {
+		this.hsMandalsMasters = hsMandalsMasters;
+	}
+
+	public MandalsMaster addHsMandalsMaster(MandalsMaster hsMandalsMaster) {
+		getHsMandalsMasters().add(hsMandalsMaster);
+		hsMandalsMaster.setHsDistrictsMaster(this);
+
+		return hsMandalsMaster;
+	}
+
+	public MandalsMaster removeHsMandalsMaster(MandalsMaster hsMandalsMaster) {
+		getHsMandalsMasters().remove(hsMandalsMaster);
+		hsMandalsMaster.setHsDistrictsMaster(null);
+
+		return hsMandalsMaster;
+	}
+
+}

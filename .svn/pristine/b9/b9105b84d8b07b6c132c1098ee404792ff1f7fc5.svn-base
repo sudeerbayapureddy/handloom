@@ -1,0 +1,43 @@
+package com.karvy.handloom.admin.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.karvy.handloom.constants.Constants_URLPath;
+
+@Controller
+public class LoginController {
+
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+	@RequestMapping(value = Constants_URLPath.LOGIN_SUCCESS, method = RequestMethod.GET)
+	public ModelAndView dashBoardPage(HttpServletRequest request) {
+
+		logger.info("LoginController Enter into loginSuccessForDO GET");
+
+		ModelAndView modelAndView = new ModelAndView("dashboardLayout/common/dashboard");
+
+		logger.info("LoginController loginSuccessForAll GET authUser {}",
+				request.getSession().getAttribute("role").toString());
+
+		return modelAndView;
+	}
+	@RequestMapping(value = "{role}/registration", method = RequestMethod.GET)
+	public ModelAndView registrationPage(HttpServletRequest request) {
+
+		logger.info("LoginController Enter into loginSuccessForDO GET");
+
+		ModelAndView modelAndView = new ModelAndView("dashboardLayout/stakeholder/registration");
+
+		logger.info("LoginController loginSuccessForAll GET authUser {}",
+				request.getSession().getAttribute("role").toString());
+
+		return modelAndView;
+	}
+}

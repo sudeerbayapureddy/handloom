@@ -1,0 +1,68 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
+
+
+/**
+ * The persistent class for the hs_stakeholder_loom_mapping database table.
+ * 
+ */
+@Entity
+@Table(name="hs_loom_details")
+@NamedQuery(name="LoomDetails.findAll", query="SELECT l FROM LoomDetails l")
+@Getter
+@Setter
+public class LoomDetails implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="LD_Id")
+	private Integer ldId;
+
+	@Column(name="LD_Barcode")
+	private BigInteger ldBarcode;
+	
+	@Column(name="LD_Yarn_Type")
+	private String ldYarnType;
+	
+	@Column(name="LD_Subsidy_Eligibility_Qty")
+	private BigDecimal ldSubsidyEligibilityQty;
+	
+	@Column(name="LD_Weaver_Name")
+	private String ldWeaverName;
+	
+	@Column(name="LD_Weaver_Aadhar_No")
+	private BigInteger ldWeaverAadharNo;
+	
+	@Column(name="LD_Longitude")
+	private BigInteger ldLongitude;
+	
+	@Column(name="LD_Latitude")
+	private BigInteger ldLatitude;
+	
+	//bi-directional many-to-one association to StakeHolder
+	@ManyToOne
+	@JoinColumn(name="LD_Address_Id")
+	private Address hsAddress;
+	
+	//bi-directional many-to-one association to StakeHolder
+	@ManyToOne
+	@JoinColumn(name="LD_Bank_Details_Id")
+	private BankDetails hsBankDetails;
+}

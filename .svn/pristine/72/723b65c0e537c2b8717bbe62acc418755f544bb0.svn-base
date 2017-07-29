@@ -1,0 +1,332 @@
+           <jsp:include page="../includes/includes.jsp"></jsp:include>
+            <div class="content-page">
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="pull-left page-title">Welcome to Telangana Handlooms !</h4>
+                                <ol class="breadcrumb pull-right">
+                                    <!--<li><a href="#">Telangana Handlooms</a></li>-->
+                                    <li class="active">Application Submission</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12">
+                               <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">Application Submission</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                         <div class="row">
+                                              <div class="col-md-12">
+                                                 <ul class="nav nav-tabs cat-tabs">
+                                                    <li class="active"><a href="#tab1" data-toggle="tab">Stake Holder</a></li>
+                                                    <li><a href="#tab2" data-toggle="tab">Loom Details</a></li>
+                                                    <li><a href="#tab3" data-toggle="tab">Ancillary Workers</a></li>
+                                                 </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active form-box" id="tab1">
+                                                        <div class="row m-t-20">
+                                              <div class="col-md-12">
+                                                 <form class="form-horizontal">
+                                                    <fieldset>
+                                                      <div class="row">
+                                                         <div class="col-md-6">
+                                                           <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Aadhaar Number</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="234556786543" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Stakeholder Type</label>
+                                                              <div class="col-md-7">
+                                                                <select id="selectbasic" name="" class="form-control">
+                                                                  <option value="1">Master Weaver</option>
+                                                                  <option value="2">SHG</option>
+                                                                  <option value="3">Society</option>
+                                                                  <option value="4">Tisco</option>
+                                                                </select>
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Name</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Rajesh Kumar" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                          
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Bank Account Number</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="67895432176" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Bank Name</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="HDFC Bank" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">IFSC Code</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="HDFC0001" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            
+                                                         </div>
+                                                         <div class="col-md-6">
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Address</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Uppal, Medchal District, Telangana." class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">District</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Medchal" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Mandal</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Uppal" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Village</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Boduppal" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Pincode</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="500039" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">No Of Looms</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="2" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                           
+                                                            
+                                                         </div>
+                                                      </div>
+                                                      <div class="row">
+                                                       <div class="col-md-12"><hr /></div>
+                                                       <div class="col-md-12">
+                                                         <div class="pull-right">
+                                                            <a class="btn btn-sm blue btnNext">Next</a>
+                                                         </div>
+                                                       </div>
+                                                      </div>
+                                                    </fieldset>
+                                                 </form>
+                                              </div>
+                                           </div>
+                                                    </div>
+                                                    <div class="tab-pane form-box" id="tab2">
+                                                      <div class="row m-t-20">
+                                                         <div class="col-md-6 col-md-offset-3">
+                                                             <form class="form-horizontal">
+                                                                <fieldset>
+                                                                  <div class="form-group">
+                                                                      <label class="col-md-4 control-label" for="">Loom Code</label>
+                                                                      <div class="col-md-7">
+                                                                        <select id="selectbasic" name="" class="form-control">
+                                                                          <option value="0">Select</option>
+                                                                          <option value="1">BA0001</option>
+                                                                          <option value="2">BA0002</option>
+                                                                          <option value="3">BA0003</option>
+                                                                          <option value="4">BA0004</option>
+                                                                        </select>
+                                                                      </div>
+                                                                   </div>
+                                                                   <div class="form-group">
+                                                                      <label class="col-md-4 control-label" for="">Yarn Type</label>
+                                                                      <div class="col-md-7">
+                                                                        <select id="selectbasic" name="" class="form-control">
+                                                                          <option value="0">Select</option>
+                                                                          <option value="1">Cotton</option>
+                                                                          <option value="2">Silk</option>
+                                                                          <option value="3">Polyster</option>
+                                                                          <option value="4">Linen</option>
+                                                                        </select>
+                                                                      </div>
+                                                                   </div>
+                                                                   <div class="form-group">
+                                                                      <label class="col-md-4 control-label" for="">&nbsp;</label>
+                                                                      <div class="col-md-7">
+                                                                        <button id="button1id" name="button1id" class="btn btn-sm pink">Submit</button>
+                                                                        <button id="button2id" name="button2id" class="btn btn-sm pink">Cancel</button>
+                                                                      </div>
+                                                                   </div>
+                                                                </fieldset>
+                                                             </form>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row m-t-10">
+                                                         <div class="col-md-8 col-md-offset-2">
+                                                            <div class="table table-responsive">
+                                                                <table class="table table-bordered m-b-0">
+                                                                    <thead>
+                                                                      <tr>
+                                                                        <th>Loom Code</th>
+                                                                        <th>Yarn Type</th>
+                                                                      </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                      <tr>
+                                                                        <td>BA0001</td>
+                                                                        <td>Cotton</td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                        <td>BA0002</td>
+                                                                        <td>Silk</td>
+                                                                      </tr>
+                                                                    </tbody>
+                                                                  </table>
+                                                             </div>
+                                                         </div>
+                                                      </div>
+                                                       <div class="row">
+                                                          <div class="col-md-12"><hr /></div>
+                                                           <div class="col-md-12">
+                                                             <div class="pull-right">
+                                                                 <a class="btn btn-sm blue btnPrevious">Previous</a>
+                                                                 <a class="btn btn-sm blue btnNext">Next</a>
+                                                             </div>
+                                                           </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane form-box" id="tab3">
+                                                          <div class="col-md-12 m-t-20">
+                                                                 <h4 class="bar-title">Loom: BA0001</h4>
+                                                                 <hr class="colored">
+                                                                 <div class="table table-responsive m-t-10">
+                                                                    <table class="table table-bordered">
+                                                                        <thead>
+                                                                          <tr>
+                                                                            <th>S.No.</th>
+                                                                            <th>Ancillary Workers</th>
+                                                                            <th>Aadhaar Number</th>
+                                                                            <th>Bank Account Number</th>
+                                                                            <th>Bank Name</th>
+                                                                            <th>IFSC Code</th>
+                                                                          </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                          <tr>
+                                                                            <td>1</td>
+                                                                            <td>Designer</td>
+                                                                            <td>624567876595</td>
+                                                                            <td>56743278961</td>
+                                                                            <td>HDFC Bank</td>
+                                                                            <td>HDFC12345</td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                            <td>2</td>
+                                                                            <td>Dyer</td>
+                                                                            <td>624544657843</td>
+                                                                            <td>76589432783</td>
+                                                                            <td>IDBI Bank</td>
+                                                                            <td>IDBI12345</td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                            <td>3</td>
+                                                                            <td>Worker</td>
+                                                                            <td>624535879564</td>
+                                                                            <td>65784389564</td>
+                                                                            <td>HDFC Bank</td>
+                                                                            <td>HDFC12345</td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                            <td>4</td>
+                                                                            <td>Cleaner</td>
+                                                                            <td>624554345986</td>
+                                                                            <td>65784389631</td>
+                                                                            <td>ICICI Bank</td>
+                                                                            <td>ICICI12345</td>
+                                                                          </tr>
+                                                                          
+                                                                        </tbody>
+                                                                      </table>
+                                                                 </div>
+                                                              </div>
+                                                          <div class="col-md-12 m-t-10">
+                                                                 <h4 class="bar-title">Loom: BA0002</h4>
+                                                                 <hr class="colored">
+                                                                 <div class="table table-responsive m-t-10">
+                                                                    <table class="table table-bordered">
+                                                                        <thead>
+                                                                          <tr>
+                                                                            <th>S.No.</th>
+                                                                            <th>Ancillary Workers</th>
+                                                                            <th>Aadhaar Number</th>
+                                                                            <th>Bank Account Number</th>
+                                                                            <th>Bank Name</th>
+                                                                            <th>IFSC Code</th>
+                                                                          </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                          <tr>
+                                                                            <td>1</td>
+                                                                            <td>Designer</td>
+                                                                            <td>724569785639</td>
+                                                                            <td>65321345678</td>
+                                    
+                                                                            <td>HDFC Bank</td>
+                                                                            <td>HDFC12345</td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                            <td>2</td>
+                                                                            <td>Dyer</td>
+                                                                            <td>684543456348</td>
+                                                                            <td>67547832765</td>
+                                                                            <td>AXIS Bank</td>
+                                                                            <td>AXIS12345</td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                            <td>3</td>
+                                                                            <td>Worker</td>
+                                                                            <td>664568954537</td>
+                                                                            <td>54600087542</td>
+                                                                            <td>HDFC Bank</td>
+                                                                            <td>HDFC12345</td>
+                                                                          </tr>
+                                                                        </tbody>
+                                                                      </table>
+                                                                 </div>
+                                                              </div>
+                                                           <div class="row">
+                                                               <div class="col-md-12"><hr /></div>
+                                                               <div class="col-md-12">
+                                                                 <div class="pull-right">
+                                                                    <a class="btn btn-sm blue btnPrevious">Previous</a>
+                                                                    <a class="btn btn-sm blue btnNext">Submit</a>
+                                                                 </div>
+                                                               </div>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                           </div>
+                                    </div>
+                               </div>
+                           </div>
+                        </div>
+                    </div>    
+                </div> 
+
+            </div>
+        </div>
+        
+       

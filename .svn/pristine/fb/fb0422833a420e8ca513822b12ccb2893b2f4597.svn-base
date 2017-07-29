@@ -1,0 +1,94 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
+
+
+/**
+ * The persistent class for the hs_address database table.
+ * @author sateesh.jangam
+ */
+@Entity
+@Table(name="hs_address")
+@NamedQuery(name="Address.findAll", query="SELECT a FROM Address a")
+@Getter
+@Setter
+public class Address extends PseudoColumns implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="Address_Id")
+	private Integer addressId;
+
+	@Column(name="Address_1")
+	private String address1;
+
+	@Column(name="Address_2")
+	private String address2;
+
+	@Column(name="Address_3")
+	private String address3;
+
+	@Column(name="pincode")
+	private int pincode;
+	
+	@Column(name="Address_District_Id")
+	private int addressDistrictId;
+	
+	@Column(name="Address_Mandal_Id")
+	private int addressMandalId;
+	
+	@Column(name="Address_State_Id")
+	private int addressStateId;
+	
+	@Column(name="Address_Village_Id")
+	private int addressVillageId;
+
+	//bi-directional many-to-one association to DistrictsMaster
+	@ManyToOne
+	@JoinColumn(name="Address_District_Id", nullable = false,insertable = false,updatable = false )
+	private DistrictsMaster hsDistrictsMaster;
+
+	//bi-directional many-to-one association to MandalsMaster
+	@ManyToOne
+	@JoinColumn(name="Address_Mandal_Id", nullable = false,insertable = false,updatable = false)
+	private MandalsMaster hsMandalsMaster;
+
+	//bi-directional many-to-one association to StatesMaster
+	@ManyToOne
+	@JoinColumn(name="Address_State_Id",nullable = false,insertable = false,updatable = false)
+	private StatesMaster hsStatesMaster;
+
+	//bi-directional many-to-one association to HsVillagesMaster
+	@ManyToOne
+	@JoinColumn(name="Address_Village_Id", nullable = false,insertable = false,updatable = false)
+	private VillagesMaster hsVillagesMaster;
+
+	//bi-directional many-to-one association to StakeHolder
+	@OneToMany(mappedBy="hsAddress")
+	private List<StakeHolder> hsStakeHolders;
+	
+	//bi-directional many-to-one association to StakeHolder
+	@OneToMany(mappedBy="hsAddress")
+	private List<LoomDetails> loomDetals;
+	
+	//bi-directional many-to-one association to StakeHolder
+	@OneToMany(mappedBy="address")
+	private List<Employee> employee;
+
+}

@@ -1,0 +1,37 @@
+/**
+ * 
+ */
+package com.karvy.handloom.stakeholder.dao.impl;
+
+import java.math.BigInteger;
+
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.karvy.handloom.common.util.HibernateUtil;
+import com.karvy.handloom.entity.LoomDetails;
+import com.karvy.handloom.stakeholder.dao.StakeHolderDAO;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Repository
+public class StakeHolderDAOImpl implements StakeHolderDAO{
+
+	@Autowired
+	HibernateUtil hibernateUtil;
+	
+	@Override
+	public LoomDetails getLoomDetails(BigInteger loomId) {
+		// TODO Auto-generated method stub
+		LoomDetails loomDetails= (LoomDetails) hibernateUtil.createEntityCriteria(LoomDetails.class).add(Restrictions.eq("ldBarcode", loomId)).uniqueResult();
+		loomDetails.getLdId();
+		loomDetails.getHsAddress().getAddress1();
+		loomDetails.getHsBankDetails().getBdAccountNo();
+		System.out.println(loomDetails.getHsBankDetails().getBdAccountNo());
+		return loomDetails;
+	}
+
+}

@@ -1,0 +1,154 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the hs_address database table.
+ * 
+ */
+@Entity
+@Table(name="hs_address")
+@NamedQuery(name="Address.findAll", query="SELECT h FROM Address h")
+public class Address implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int address_Id;
+
+	@Lob
+	private String address_1;
+
+	@Lob
+	private String address_2;
+
+	@Lob
+	private String address_3;
+
+	private int pincode;
+
+	//bi-directional many-to-one association to HsStatesMaster
+	@ManyToOne
+	@JoinColumn(name="Address_State_Id")
+	private StatesMaster hsStatesMaster;
+
+	//bi-directional many-to-one association to HsDistrictsMaster
+	@ManyToOne
+	@JoinColumn(name="Address_District_Id")
+	private DistrictsMaster hsDistrictsMaster;
+
+	//bi-directional many-to-one association to HsMandalsMaster
+	@ManyToOne
+	@JoinColumn(name="Address_Mandal_Id")
+	private MandalsMaster hsMandalsMaster;
+
+	//bi-directional many-to-one association to HsVillagesMaster
+	@ManyToOne
+	@JoinColumn(name="Address_Village_Id")
+	private VillagesMaster hsVillagesMaster;
+
+	//bi-directional many-to-one association to HsStakeHolder
+	@OneToMany(mappedBy="hsAddress")
+	private List<StakeHolder> hsStakeHolders;
+
+	public Address() {
+	}
+
+	public int getAddress_Id() {
+		return this.address_Id;
+	}
+
+	public void setAddress_Id(int address_Id) {
+		this.address_Id = address_Id;
+	}
+
+	public String getAddress_1() {
+		return this.address_1;
+	}
+
+	public void setAddress_1(String address_1) {
+		this.address_1 = address_1;
+	}
+
+	public String getAddress_2() {
+		return this.address_2;
+	}
+
+	public void setAddress_2(String address_2) {
+		this.address_2 = address_2;
+	}
+
+	public String getAddress_3() {
+		return this.address_3;
+	}
+
+	public void setAddress_3(String address_3) {
+		this.address_3 = address_3;
+	}
+
+	public int getPincode() {
+		return this.pincode;
+	}
+
+	public void setPincode(int pincode) {
+		this.pincode = pincode;
+	}
+
+	public StatesMaster getHsStatesMaster() {
+		return this.hsStatesMaster;
+	}
+
+	public void setHsStatesMaster(StatesMaster hsStatesMaster) {
+		this.hsStatesMaster = hsStatesMaster;
+	}
+
+	public DistrictsMaster getHsDistrictsMaster() {
+		return this.hsDistrictsMaster;
+	}
+
+	public void setHsDistrictsMaster(DistrictsMaster hsDistrictsMaster) {
+		this.hsDistrictsMaster = hsDistrictsMaster;
+	}
+
+	public MandalsMaster getHsMandalsMaster() {
+		return this.hsMandalsMaster;
+	}
+
+	public void setHsMandalsMaster(MandalsMaster hsMandalsMaster) {
+		this.hsMandalsMaster = hsMandalsMaster;
+	}
+
+	public VillagesMaster getHsVillagesMaster() {
+		return this.hsVillagesMaster;
+	}
+
+	public void setHsVillagesMaster(VillagesMaster hsVillagesMaster) {
+		this.hsVillagesMaster = hsVillagesMaster;
+	}
+
+	public List<StakeHolder> getHsStakeHolders() {
+		return this.hsStakeHolders;
+	}
+
+	public void setHsStakeHolders(List<StakeHolder> hsStakeHolders) {
+		this.hsStakeHolders = hsStakeHolders;
+	}
+
+	public StakeHolder addHsStakeHolder(StakeHolder hsStakeHolder) {
+		getHsStakeHolders().add(hsStakeHolder);
+		hsStakeHolder.setHsAddress(this);
+
+		return hsStakeHolder;
+	}
+
+	public StakeHolder removeHsStakeHolder(StakeHolder hsStakeHolder) {
+		getHsStakeHolders().remove(hsStakeHolder);
+		hsStakeHolder.setHsAddress(null);
+
+		return hsStakeHolder;
+	}
+
+}

@@ -1,0 +1,236 @@
+ <jsp:include page="../includes/includes.jsp"></jsp:include>
+<style>
+.ui-accordion-header-icon{
+float:left;
+}
+</style>
+
+
+<body class="fixed-left">
+		<div class="content-page">
+			<div class="content">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<h4 class="pull-left page-title">Welcome to Telangana
+								Handlooms !</h4>
+							<ol class="breadcrumb pull-right">
+								<!--<li><a href="#">Telangana Handlooms</a></li>-->
+								<li class="active">Application Approval</li>
+							</ol>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-theme">
+								<div class="panel-heading">
+									<h4 class="panel-title">Registration Form Details</h4>
+								</div>
+								<div class="panel-body">
+									<div class="row m-t-20">
+
+										<div class="row">
+
+											<div class="col-md-12">
+
+												<div id="accordion" class="panel panel-theme">
+													<div class="panel-heading">
+														<h5 class="panel-title">Stack Holder</h5>
+													</div>
+													<div>
+														<table class="table table-bordered">
+															<tr>
+																<td><label>Stakeholder Type</label></td>
+																<td>Master Weaver</td>
+
+																<td><label>Name:</label></td>
+																<td>Master Weaver</td>
+
+															</tr>
+															<tr>
+																<td><label>Aadhaar Number</label></td>
+																<td>45843945645</td>
+																<td><label>Bank Account Number</label></td>
+																<td>432423423</td>
+
+															</tr>
+															<tr>
+																<td><label>Bank Name</label></td>
+																<td>ICICI</td>
+																<td><label>IFSC Code</label></td>
+																<td>ICIC090445</td>
+
+															</tr>
+															<tr>
+																<td><label>Address</label></td>
+																<td>Master Weaver</td>
+																<td><label>District</label></td>
+																<td>Master Weaver</td>
+
+															</tr>
+															<tr>
+																<td><label>Mandal</label></td>
+																<td>Master Weaver</td>
+																<td><label>Village:</label></td>
+																<td>Master Weaver</td>
+
+															</tr>
+
+															<tr>
+																<td><label>Pincode</label></td>
+																<td>Master Weaver</td>
+																<td></td>
+																<td></td>
+															</tr>
+														</table>
+													</div>
+													<div class="panel-heading m-t-5">
+														<h5 class="panel-title">Loom Details</h5>
+													</div>
+
+													<div>
+														<table class="table table-bordered">
+															<tr>
+																<td><label>Loom Code</label></td>
+																<td>Master Weaver</td>
+
+																<td><label>Yarn Type:</label></td>
+																<td>Master Weaver</td>
+
+															</tr>
+														</table>
+
+
+													</div>
+													<div class="panel-heading  m-t-5">
+														<h5 class="panel-title">Ancilary Workers Details</h5>
+													</div>
+													<div>
+														<table class="table table-bordered">
+															<tr>
+																<td><label>Ancillary Workers</label></td>
+																<td>Master Weaver</td>
+
+																<td><label>Aadhaar Number:</label></td>
+																<td>Master Weaver</td>
+
+															</tr>
+															<tr>
+																<td><label>Bank Account Number</label></td>
+																<td>Master Weaver</td>
+
+																<td><label>Bank Account Number</label></td>
+																<td>Master Weaver</td>
+
+															</tr>
+
+															<tr>
+																<td><label>IFSC Code</label></td>
+																<td>Master Weaver</td>
+
+																<td></td>
+																<td></td>
+
+															</tr>
+														</table>
+
+													</div>
+													<div class="panel-heading  m-t-5">
+														<h5 class="panel-title">Approval History</h5>
+													</div>
+													<div>
+
+														<table class="table table-bordered">
+															<thead>
+																<tr>
+																	<th>Action</th>
+																	<th>Raised By</th>
+																	<th>Raised Date</th>
+																	<th>Approved Date</th>
+																	<th>Next Level</th>
+																	<th>Comments</th>
+																	<th>Approval Status</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td></td>
+																	<td></td>
+																	<td></td>
+																	<td></td>
+																	<td></td>
+																	<td></td>
+																	<td></td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td></td>
+																	<td></td>
+																	<td></td>
+																	<td></td>
+																	<td></td>
+																	<td></td>
+																</tr>
+															</tbody>
+
+														</table>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<footer class="footer text-right"> &copy; 2017 Telangana
+					Handlooms. All rights reserved. </footer>
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Reject Reasons</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="col-md-12">
+										<form class="form-horizontal">
+											<fieldset>
+												<div class="form-group">
+													<div class="col-md-12">
+														<textarea class="form-control" id="textarea" rows="5"
+															name="textarea"></textarea>
+													</div>
+												</div>
+											</fieldset>
+										</form>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-sm pink">Submit</button>
+								<button type="button" class="btn btn-sm pink"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(function() {
+			$("#accordion").accordion();
+		});
+	</script>
+
+</body>

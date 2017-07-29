@@ -1,0 +1,239 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the stake_holder_details database table.
+ * 
+ */
+@Entity
+@Table(name="stake_holder_details")
+@NamedQuery(name="StakeHolderDetail.findAll", query="SELECT s FROM StakeHolderDetail s")
+public class StakeHolderDetail implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idstake_holder_details")
+	private int idstakeHolderDetails;
+
+	@Column(name="aadhar_number")
+	private String aadharNumber;
+
+	private String address;
+
+	@Column(name="approval_status")
+	private String approvalStatus;
+
+	@Column(name="bank_account")
+	private String bankAccount;
+
+	@Column(name="bank_name")
+	private String bankName;
+
+	private String createdby;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdon;
+
+	private String district;
+
+	private String ifsc;
+
+	private String mandal;
+
+	private String name;
+
+	private String pincode;
+
+	@Column(name="sh_reg_id")
+	private String shRegId;
+
+	@Column(name="sh_type")
+	private String shType;
+
+	private String updatedby;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updatedon;
+
+	private String village;
+
+	//bi-directional many-to-one association to ShLoomMapping
+	@OneToMany(mappedBy="stakeHolderDetail")
+	private List<ShLoomMapping> shLoomMappings;
+
+	public StakeHolderDetail() {
+	}
+
+	public int getIdstakeHolderDetails() {
+		return this.idstakeHolderDetails;
+	}
+
+	public void setIdstakeHolderDetails(int idstakeHolderDetails) {
+		this.idstakeHolderDetails = idstakeHolderDetails;
+	}
+
+	public String getAadharNumber() {
+		return this.aadharNumber;
+	}
+
+	public void setAadharNumber(String aadharNumber) {
+		this.aadharNumber = aadharNumber;
+	}
+
+	public String getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getApprovalStatus() {
+		return this.approvalStatus;
+	}
+
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+
+	public String getBankAccount() {
+		return this.bankAccount;
+	}
+
+	public void setBankAccount(String bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+
+	public String getBankName() {
+		return this.bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
+	public String getCreatedby() {
+		return this.createdby;
+	}
+
+	public void setCreatedby(String createdby) {
+		this.createdby = createdby;
+	}
+
+	public Date getCreatedon() {
+		return this.createdon;
+	}
+
+	public void setCreatedon(Date createdon) {
+		this.createdon = createdon;
+	}
+
+	public String getDistrict() {
+		return this.district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getIfsc() {
+		return this.ifsc;
+	}
+
+	public void setIfsc(String ifsc) {
+		this.ifsc = ifsc;
+	}
+
+	public String getMandal() {
+		return this.mandal;
+	}
+
+	public void setMandal(String mandal) {
+		this.mandal = mandal;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPincode() {
+		return this.pincode;
+	}
+
+	public void setPincode(String pincode) {
+		this.pincode = pincode;
+	}
+
+	public String getShRegId() {
+		return this.shRegId;
+	}
+
+	public void setShRegId(String shRegId) {
+		this.shRegId = shRegId;
+	}
+
+	public String getShType() {
+		return this.shType;
+	}
+
+	public void setShType(String shType) {
+		this.shType = shType;
+	}
+
+	public String getUpdatedby() {
+		return this.updatedby;
+	}
+
+	public void setUpdatedby(String updatedby) {
+		this.updatedby = updatedby;
+	}
+
+	public Date getUpdatedon() {
+		return this.updatedon;
+	}
+
+	public void setUpdatedon(Date updatedon) {
+		this.updatedon = updatedon;
+	}
+
+	public String getVillage() {
+		return this.village;
+	}
+
+	public void setVillage(String village) {
+		this.village = village;
+	}
+
+	public List<ShLoomMapping> getShLoomMappings() {
+		return this.shLoomMappings;
+	}
+
+	public void setShLoomMappings(List<ShLoomMapping> shLoomMappings) {
+		this.shLoomMappings = shLoomMappings;
+	}
+
+	public ShLoomMapping addShLoomMapping(ShLoomMapping shLoomMapping) {
+		getShLoomMappings().add(shLoomMapping);
+		shLoomMapping.setStakeHolderDetail(this);
+
+		return shLoomMapping;
+	}
+
+	public ShLoomMapping removeShLoomMapping(ShLoomMapping shLoomMapping) {
+		getShLoomMappings().remove(shLoomMapping);
+		shLoomMapping.setStakeHolderDetail(null);
+
+		return shLoomMapping;
+	}
+
+}

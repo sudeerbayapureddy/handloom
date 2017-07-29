@@ -1,0 +1,15 @@
+package com.karvy.handloom.constants;
+
+public class Constant_Variables {
+
+	/** The Constant OK. */
+	public static final String OK = "ok";
+	
+	/** The Constant OK. */
+	public static final String NOT_OK = "not ok";
+	  
+	/** The Constant OK. */
+	public static final String OTP_URL = "/OTPVerificationForm";
+	
+	
+}

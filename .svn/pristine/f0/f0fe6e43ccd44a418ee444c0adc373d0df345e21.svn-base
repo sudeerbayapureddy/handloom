@@ -1,0 +1,130 @@
+package com.karvy.handloom.security;
+
+/**
+ * @author sudeer.bayapureddy
+ *
+ */
+import java.io.IOException;
+
+import javax.management.relation.Role;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.karvy.handloom.admin.bean.UserBean;
+import com.karvy.handloom.signup.service.SignUPService;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CustomAuthenticationSuccessHandler.
+ */
+public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+     
+	
+	@Autowired
+	SignUPService signUPService;
+	
+	
+	/** The Constant logger. */
+	private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationSuccessHandler.class);
+
+	/** The redirect strategy. */
+	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.springframework.security.web.authentication.
+	 * AuthenticationSuccessHandler#onAuthenticationSuccess(javax.servlet.http.
+	 * HttpServletRequest, javax.servlet.http.HttpServletResponse,
+	 * org.springframework.security.core.Authentication)
+	 */
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
+
+		HttpSession session = request.getSession();
+		String captcha = (String) session.getAttribute("Captcha");
+		String enteredCaptcha = request.getParameter("captchaInput");
+		logger.info("CustomAuthenticationSuccessHandler onAuthenticationSuccess captcha {} and EnteredCaptcha {}",
+				captcha, enteredCaptcha);
+
+		if (enteredCaptcha == null || enteredCaptcha == "" || enteredCaptcha == " "
+				|| !(enteredCaptcha.equals(captcha))) {
+			logger.info("remote login user details {} {}", request.getRemoteAddr(), request.getRemoteHost());
+			redirectStrategy.sendRedirect(request, response, "/logout?captchaError=1");
+
+		} else if (enteredCaptcha.equals(captcha)) {
+			/* Set some session variables */
+			User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			logger.info("CustomAuthenticationSuccessHandler onAuthenticationSuccess authUser.getUsername() {}",
+					authUser.getUsername());
+			logger.info("CustomAuthenticationSuccessHandler onAuthenticationSuccess authentication.getAuthorities() ",
+					authentication.getAuthorities());
+			session.setAttribute("uname", authUser.getUsername());
+			session.setAttribute("authorities", authentication.getAuthorities());
+
+			logger.info("remote login user details {} {}", request.getRemoteAddr(), request.getRemoteHost());
+			/* Set target URL to redirect */
+			String targetUrl = determineTargetUrl(authentication, session);
+			logger.info("targetUrl {} {} {} ", request, response, targetUrl);
+			// ((DefaultRedirectStrategy)redirectStrategy).setContextRelative(true);
+			redirectStrategy.sendRedirect(request, response, targetUrl);
+		}
+
+	}
+
+	/**
+	 * Determine target url.
+	 *
+	 * @param authentication
+	 *            the authentication
+	 * @param session
+	 *            the session
+	 * @return the string
+	 */
+	protected String determineTargetUrl(Authentication authentication, HttpSession session) {
+
+		String role = authentication.getAuthorities().toString().substring(1,
+				authentication.getAuthorities().toString().length() - 1);
+		UserBean userBean = signUPService.getUserDetails(session.getAttribute("uname").toString(),role);
+			session.setAttribute("name",userBean.getName());
+			logger.info("name is {}", session.getAttribute("name"));	
+		logger.info("role is {}", role);
+		session.setAttribute("role", role);
+		logger.info("authorities.contains role {}", role);
+		return "/" + role.toLowerCase() + "/loginSuccess";
+
+	}
+
+	/**
+	 * Gets the redirect strategy.
+	 *
+	 * @return the redirect strategy
+	 */
+	public RedirectStrategy getRedirectStrategy() {
+		return redirectStrategy;
+	}
+
+	/**
+	 * Sets the redirect strategy.
+	 *
+	 * @param redirectStrategy
+	 *            the new redirect strategy
+	 */
+	public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
+		this.redirectStrategy = redirectStrategy;
+	}
+
+}

@@ -1,0 +1,15 @@
+package com.karvy.handloom.admin.bean;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+public class ADApprovalBean {
+
+	String requestNo;
+	Integer requestId;
+	String stakeholderType;
+	String stakeholderName;
+	String status;
+}

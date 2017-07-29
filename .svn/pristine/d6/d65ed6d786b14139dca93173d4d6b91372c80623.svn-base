@@ -1,0 +1,33 @@
+/**
+ * 
+ */
+package com.karvy.handloom.stakeholder.service;
+
+import java.math.BigInteger;
+import java.util.List;
+
+import com.karvy.handloom.entity.BankMaster;
+import com.karvy.handloom.entity.DistrictsMaster;
+import com.karvy.handloom.entity.LoomDetails;
+import com.karvy.handloom.entity.MandalsMaster;
+import com.karvy.handloom.entity.VillagesMaster;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+public interface StakeHolderService {
+
+	LoomDetails getLoomDetails(BigInteger loomId);
+	
+	public List<BankMaster> getBankMasterDetails();
+
+	public List<DistrictsMaster> getDistrictDetails();
+
+	public List<MandalsMaster> getMandalDetails(int distId);
+
+	public List<VillagesMaster> getVillageDetails(int manId);
+
+	public LoomDetails getLoomDetailsByAadhar(String aadharNo);
+
+}

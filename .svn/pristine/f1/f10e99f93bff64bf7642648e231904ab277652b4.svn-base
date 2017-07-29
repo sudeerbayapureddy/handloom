@@ -1,0 +1,161 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the hs_stake_holder database table.
+ * 
+ */
+@Entity
+@Table(name="hs_stake_holder")
+@NamedQuery(name="StakeHolder.findAll", query="SELECT h FROM StakeHolder h")
+public class StakeHolder implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int SH_Id;
+
+	private String created_By;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created_Date;
+
+	private byte is_Active;
+
+	private String modified_By;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date modified_Date;
+
+	private String SH_Aadhar_No;
+
+	private String SH_Approval_Status;
+
+	private String SH_Name;
+
+	private String SH_Reg_No;
+
+	private String SH_Type;
+
+	//bi-directional many-to-one association to HsBankBranch
+	@ManyToOne
+	@JoinColumn(name="SH_Branch_Id")
+	private BankBranch hsBankBranch;
+
+	//bi-directional many-to-one association to HsAddress
+	@ManyToOne
+	@JoinColumn(name="SH_Address_Id")
+	private Address hsAddress;
+
+	public StakeHolder() {
+	}
+
+	public int getSH_Id() {
+		return this.SH_Id;
+	}
+
+	public void setSH_Id(int SH_Id) {
+		this.SH_Id = SH_Id;
+	}
+
+	public String getCreated_By() {
+		return this.created_By;
+	}
+
+	public void setCreated_By(String created_By) {
+		this.created_By = created_By;
+	}
+
+	public Date getCreated_Date() {
+		return this.created_Date;
+	}
+
+	public void setCreated_Date(Date created_Date) {
+		this.created_Date = created_Date;
+	}
+
+	public byte getIs_Active() {
+		return this.is_Active;
+	}
+
+	public void setIs_Active(byte is_Active) {
+		this.is_Active = is_Active;
+	}
+
+	public String getModified_By() {
+		return this.modified_By;
+	}
+
+	public void setModified_By(String modified_By) {
+		this.modified_By = modified_By;
+	}
+
+	public Date getModified_Date() {
+		return this.modified_Date;
+	}
+
+	public void setModified_Date(Date modified_Date) {
+		this.modified_Date = modified_Date;
+	}
+
+	public String getSH_Aadhar_No() {
+		return this.SH_Aadhar_No;
+	}
+
+	public void setSH_Aadhar_No(String SH_Aadhar_No) {
+		this.SH_Aadhar_No = SH_Aadhar_No;
+	}
+
+	public String getSH_Approval_Status() {
+		return this.SH_Approval_Status;
+	}
+
+	public void setSH_Approval_Status(String SH_Approval_Status) {
+		this.SH_Approval_Status = SH_Approval_Status;
+	}
+
+	public String getSH_Name() {
+		return this.SH_Name;
+	}
+
+	public void setSH_Name(String SH_Name) {
+		this.SH_Name = SH_Name;
+	}
+
+	public String getSH_Reg_No() {
+		return this.SH_Reg_No;
+	}
+
+	public void setSH_Reg_No(String SH_Reg_No) {
+		this.SH_Reg_No = SH_Reg_No;
+	}
+
+	public String getSH_Type() {
+		return this.SH_Type;
+	}
+
+	public void setSH_Type(String SH_Type) {
+		this.SH_Type = SH_Type;
+	}
+
+	public BankBranch getHsBankBranch() {
+		return this.hsBankBranch;
+	}
+
+	public void setHsBankBranch(BankBranch hsBankBranch) {
+		this.hsBankBranch = hsBankBranch;
+	}
+
+	public Address getHsAddress() {
+		return this.hsAddress;
+	}
+
+	public void setHsAddress(Address hsAddress) {
+		this.hsAddress = hsAddress;
+	}
+
+}

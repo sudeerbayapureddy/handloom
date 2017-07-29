@@ -1,0 +1,186 @@
+/**
+ * 
+ */
+package com.karvy.handloom.stakeholder.dao.impl;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.AliasToBeanResultTransformer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.karvy.handloom.common.dto.LoomDetailsDTO;
+import com.karvy.handloom.common.dto.YarnIndentDetailDTO;
+import com.karvy.handloom.common.util.HibernateUtil;
+import com.karvy.handloom.entity.BankMaster;
+import com.karvy.handloom.entity.DistrictsMaster;
+import com.karvy.handloom.entity.LoomDetails;
+import com.karvy.handloom.entity.MandalsMaster;
+import com.karvy.handloom.entity.VillagesMaster;
+import com.karvy.handloom.entity.YarnIndent;
+import com.karvy.handloom.entity.YarnIndentDetail;
+import com.karvy.handloom.stakeholder.dao.StakeHolderDAO;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Repository
+public class StakeHolderDAOImpl implements StakeHolderDAO{
+
+	@Autowired
+	HibernateUtil hibernateUtil;
+	
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	@Override
+	public LoomDetailsDTO getLoomDetails(BigInteger loomId) {
+		// TODO Auto-generated method stub
+		/*LoomDetails loomDetails= (LoomDetails) hibernateUtil.createEntityCriteria(LoomDetails.class).add(Restrictions.eq("ldBarcode", loomId)).uniqueResult();
+		loomDetails.getLdId();
+		loomDetails.getHsAddress().getAddress1();
+		loomDetails.getHsBankDetails().getBdAccountNo();
+		System.out.println(loomDetails.getHsBankDetails().getBdAccountNo());
+		return loomDetails;*/
+		
+		Criteria loomDetails = sessionFactory.getCurrentSession().createCriteria(LoomDetails.class,"loom");
+		loomDetails.add(Restrictions.eq("ldBarcode", loomId));
+		ProjectionList p1=Projections.projectionList();
+		p1.add(Projections.property("loom.ldId"),"ldId");
+		p1.add(Projections.property("loom.ldBarcode"),"ldBarcode");
+		p1.add(Projections.property("loom.ldYarnType"),"ldYarnType");
+		p1.add(Projections.property("loom.ldSubsidyEligibilityQty"),"ldSubsidyEligibilityQty");
+		p1.add(Projections.property("loom.ldWeaverName"),"ldWeaverName");	
+		loomDetails.setProjection(p1);
+		loomDetails.setResultTransformer(new AliasToBeanResultTransformer(LoomDetailsDTO.class));
+		LoomDetailsDTO  lmdeatilsDto=(LoomDetailsDTO) loomDetails.uniqueResult();
+		
+		
+		return lmdeatilsDto;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BankMaster> getBankMasterDetails() {
+		List<BankMaster> bankDetails = new ArrayList<BankMaster>();
+		bankDetails = hibernateUtil.createEntityCriteria(BankMaster.class).list();
+		if(bankDetails.size()>0){
+			//bankDetails.get(0).getHsBankBranches().get(0).getBdAccountNo();
+		}	
+		return bankDetails;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DistrictsMaster> getDistrictDetails() {
+		List<DistrictsMaster> distDetails = new ArrayList<DistrictsMaster>();
+		distDetails = hibernateUtil.createEntityCriteria(DistrictsMaster.class).add(Restrictions.eq("districtStateId", 1)).list();	
+		if(distDetails.size()>0){
+			//distDetails.get(0).getHsAddresses().get(0).getAddress1();
+			//distDetails.get(0).getHsStatesMaster().getHsDistrictsMasters().get(0).getDistrictName();
+			//distDetails.get(0).getHsMandalsMasters().get(0).getMandalName();
+			//distDetails.get(0).getHsMandalsMasters().get(0).getHsAddresses().get(0).getAddress1();
+		}		
+		return distDetails;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MandalsMaster> getMandalDetails(int distId) {
+		List<MandalsMaster> mandalDetails = new ArrayList<MandalsMaster>();
+		mandalDetails = hibernateUtil.createEntityCriteria(MandalsMaster.class).add(Restrictions.eq("mandalDistrictId", distId)).list();	
+		if(mandalDetails.size()>0){
+			//mandalDetails.get(0).getHsDistrictsMaster().getDistrictName();
+		}		
+		return mandalDetails;	
+		}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<VillagesMaster> getVillageDetails(int manId) {
+		List<VillagesMaster> villageDetails = new ArrayList<VillagesMaster>();
+		villageDetails = hibernateUtil.createEntityCriteria(VillagesMaster.class).add(Restrictions.eq("villageMandalId", manId)).list();	
+		if(villageDetails.size()>0){
+			//villageDetails.get(0).getHsAddresses().get(0).getAddress1();
+		}		
+		return villageDetails;
+	}
+
+	@Override
+	public LoomDetails getLoomDetailsByAadhar(String aadharNo) {
+		BigInteger aadNo = new BigInteger(aadharNo);
+		LoomDetails loomDetails =  (LoomDetails) hibernateUtil.createEntityCriteria(LoomDetails.class)
+				.add(Restrictions.eq("ldWeaverAadharNo", aadNo)).uniqueResult();
+		if(loomDetails != null) {
+			//loomDetails.getHsAddress().getHsStakeHolders().get(0).getHsAddress();
+			//loomDetails.getHsAddress().getHsStatesMaster().getHsDistrictsMasters().get(0).getDistrictName();
+			//loomDetails.getHsBankDetails().getBdAccountNo();
+		}
+		return loomDetails;
+	}
+
+	@Override
+	public String saveIndentDetails(YarnIndent indent) {
+		// TODO Auto-generated method stub
+		
+		String status="F";
+		try{
+		hibernateUtil.saveORUpdate(indent);
+		status="S";
+		}
+		catch(Exception e)
+		{
+			status="F";
+		}
+		return status;
+	}
+
+	@Override
+	public List<YarnIndent> getIndentList(Integer shId) {
+		// TODO Auto-generated method stub
+		return hibernateUtil.createEntityCriteria(YarnIndent.class).add(Restrictions.eq("yarnSHId", shId)).list();
+	}
+
+	@Override
+	public List<YarnIndentDetailDTO> getYarnIndentDetail(String indentId) {
+		// TODO Auto-generated method stub
+		
+		Criteria loomDetails = sessionFactory.getCurrentSession().createCriteria(YarnIndentDetail.class,"indentdetails");
+		loomDetails.createAlias("indentdetails.hsYarnIndent", "indent");
+		loomDetails.createAlias("indent.hsStakeHolders", "hsStakeHolders",Criteria.LEFT_JOIN);
+		loomDetails.createAlias("hsStakeHolders.hsStakeholderLoomMappings", "loommapping",Criteria.LEFT_JOIN);
+		loomDetails.createAlias("loommapping.loomDetails", "loom",Criteria.LEFT_JOIN);
+		loomDetails.add(Restrictions.eq("indent.yarnIndentId", Integer.parseInt(indentId)));
+		ProjectionList p1=Projections.projectionList();
+		p1.add(Projections.property("indentdetails.yidId"),"yidId");
+		p1.add(Projections.property("indentdetails.yidLoomBarcode"),"yidLoomBarcode");
+		p1.add(Projections.property("indentdetails.yidQuantity"),"yidQuantity");
+		p1.add(Projections.property("indentdetails.yidSubsidyEligibilityQty"),"yidSubsidyEligibilityQty");
+		p1.add(Projections.property("loom.ldYarnType"),"yarnType");
+		loomDetails.setProjection(p1);
+		loomDetails.setResultTransformer(new AliasToBeanResultTransformer(YarnIndentDetailDTO.class));
+		List<YarnIndentDetailDTO>  lmdeatils=(List<YarnIndentDetailDTO>) loomDetails.list();
+		return lmdeatils;
+	}
+
+	@Override
+	public List<String> getYarnType(List<BigInteger> barCodes) {
+		// TODO Auto-generated method stub
+		Criteria loomDetails = sessionFactory.getCurrentSession().createCriteria(LoomDetails.class);
+		loomDetails.add(Restrictions.in("ldBarcode", barCodes));
+		ProjectionList p1=Projections.projectionList();
+		p1.add(Projections.property("ldBarcode"),"ldBarcode");
+		loomDetails.setProjection(p1);
+		return loomDetails.list();
+	}
+
+	
+}

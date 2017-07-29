@@ -1,0 +1,73 @@
+package com.karvy.handloom.common.util;
+
+import java.rmi.RemoteException;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+import org.tempuri.ISMSServiceProxy;
+import com.karvy.handloom.constants.Constant_Variables;
+
+@Service
+public class MailAndMessangeSendingUtil {
+	
+	
+	private static final Logger logger = LoggerFactory.getLogger(MailAndMessangeSendingUtil.class);
+
+	@Autowired
+	private JavaMailSender mailSender;
+
+	public String mailSender(String name, String OTP, String otpUrl,
+			String fromEmail, String toEmail, String subject) {
+		String result = null;
+
+		logger.info("mailSender  username {} ", name);
+		logger.info("mailSender  OTP {} ", OTP);
+		logger.info("mailSender  activartionUrl {} ", otpUrl);
+		logger.info("mailSender  fromEmail {} ", fromEmail);
+		logger.info("mailSender  toEmail {} ", toEmail);
+		logger.info("mailSender  subject {} ", subject);
+
+		MimeMessage message1 = mailSender.createMimeMessage();
+
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(message1, true);
+
+			helper.setFrom(fromEmail);
+			helper.setTo(toEmail);
+			helper.setSubject(subject);
+			helper.setText("Hi " + name + "," + "\n" + "UserName: " + OTP 
+					+ "\n" + "Click here to Active your Account: " + otpUrl);
+
+			mailSender.send(message1);
+
+			result = new String(Constant_Variables.OK);
+		} catch (MessagingException e) {
+			logger.error("MessagingException  " + e);
+			result = new String(Constant_Variables.NOT_OK);
+		}
+
+		return result;
+	}
+
+	public Boolean MessageSender(String name, String otp, String otpUrl,
+			String mobileNumber) throws RemoteException {
+
+		logger.info("MessageSender  firstName {} ", name);
+		logger.info("MessageSender  password {} ", otp);
+		logger.info("MessageSender  activartionUrl {} ", otpUrl);
+		logger.info("MessageSender  mobileNumber {} ", mobileNumber);
+
+		String message ="Hi "+ name + "\n" + "Your OTP: " + otp ;
+		//+ "\n"+ "Click here to Active your Account: " + otpUrl;
+
+		ISMSServiceProxy ismsServiceProxyObject = new ISMSServiceProxy();
+
+		return ismsServiceProxyObject.sendMessage("Handlooms : "+"\n" + message, mobileNumber);
+	}
+
+}

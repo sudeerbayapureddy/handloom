@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package com.karvy.handloom.signup.dao;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+public interface SignUPDAO {
+
+}

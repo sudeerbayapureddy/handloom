@@ -1,0 +1,36 @@
+/**
+ * 
+ */
+package com.karvy.handloom.stakeholder.service.impl;
+
+import java.math.BigInteger;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.karvy.handloom.entity.LoomDetails;
+import com.karvy.handloom.stakeholder.dao.StakeHolderDAO;
+import com.karvy.handloom.stakeholder.service.StakeHolderService;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Service
+@Transactional
+public class StakeHolderServiceImpl implements StakeHolderService{
+
+	@Autowired
+	StakeHolderDAO stakeHolderDAO;
+	
+	@Override
+	public LoomDetails getLoomDetails(BigInteger loomId) {
+		// TODO Auto-generated method stub
+		LoomDetails loomDetails= stakeHolderDAO.getLoomDetails(loomId);
+		
+		 return loomDetails;
+	}
+
+}

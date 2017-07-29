@@ -1,0 +1,17 @@
+/**
+ * 
+ */
+package com.karvy.handloom.ad.service;
+
+import java.util.List;
+
+import com.karvy.handloom.admin.bean.ADApprovalBean;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+public interface ADApprovalFlowService {
+
+	 List<ADApprovalBean> getADGridDetails(String username, String roleName);
+}

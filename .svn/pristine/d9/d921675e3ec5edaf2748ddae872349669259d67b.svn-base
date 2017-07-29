@@ -1,0 +1,127 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the ancillary_workers_mapping database table.
+ * 
+ */
+@Entity
+@Table(name="ancillary_workers_mapping")
+@NamedQuery(name="AncillaryWorkersMapping.findAll", query="SELECT a FROM AncillaryWorkersMapping a")
+public class AncillaryWorkersMapping implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idancillary_workers_mapping")
+	private int idancillaryWorkersMapping;
+
+	private String createdby;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdon;
+
+	@Column(name="loom_barcode")
+	private String loomBarcode;
+
+	private String updatedby;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updatedon;
+
+	//bi-directional many-to-one association to AncillaryWorkersMapping
+	@ManyToOne
+	@JoinColumn(name="idancillary_worker_details")
+	private AncillaryWorkersMapping ancillaryWorkersMapping;
+
+	//bi-directional many-to-one association to AncillaryWorkersMapping
+	@OneToMany(mappedBy="ancillaryWorkersMapping")
+	private List<AncillaryWorkersMapping> ancillaryWorkersMappings;
+
+	public AncillaryWorkersMapping() {
+	}
+
+	public int getIdancillaryWorkersMapping() {
+		return this.idancillaryWorkersMapping;
+	}
+
+	public void setIdancillaryWorkersMapping(int idancillaryWorkersMapping) {
+		this.idancillaryWorkersMapping = idancillaryWorkersMapping;
+	}
+
+	public String getCreatedby() {
+		return this.createdby;
+	}
+
+	public void setCreatedby(String createdby) {
+		this.createdby = createdby;
+	}
+
+	public Date getCreatedon() {
+		return this.createdon;
+	}
+
+	public void setCreatedon(Date createdon) {
+		this.createdon = createdon;
+	}
+
+	public String getLoomBarcode() {
+		return this.loomBarcode;
+	}
+
+	public void setLoomBarcode(String loomBarcode) {
+		this.loomBarcode = loomBarcode;
+	}
+
+	public String getUpdatedby() {
+		return this.updatedby;
+	}
+
+	public void setUpdatedby(String updatedby) {
+		this.updatedby = updatedby;
+	}
+
+	public Date getUpdatedon() {
+		return this.updatedon;
+	}
+
+	public void setUpdatedon(Date updatedon) {
+		this.updatedon = updatedon;
+	}
+
+	public AncillaryWorkersMapping getAncillaryWorkersMapping() {
+		return this.ancillaryWorkersMapping;
+	}
+
+	public void setAncillaryWorkersMapping(AncillaryWorkersMapping ancillaryWorkersMapping) {
+		this.ancillaryWorkersMapping = ancillaryWorkersMapping;
+	}
+
+	public List<AncillaryWorkersMapping> getAncillaryWorkersMappings() {
+		return this.ancillaryWorkersMappings;
+	}
+
+	public void setAncillaryWorkersMappings(List<AncillaryWorkersMapping> ancillaryWorkersMappings) {
+		this.ancillaryWorkersMappings = ancillaryWorkersMappings;
+	}
+
+	public AncillaryWorkersMapping addAncillaryWorkersMapping(AncillaryWorkersMapping ancillaryWorkersMapping) {
+		getAncillaryWorkersMappings().add(ancillaryWorkersMapping);
+		ancillaryWorkersMapping.setAncillaryWorkersMapping(this);
+
+		return ancillaryWorkersMapping;
+	}
+
+	public AncillaryWorkersMapping removeAncillaryWorkersMapping(AncillaryWorkersMapping ancillaryWorkersMapping) {
+		getAncillaryWorkersMappings().remove(ancillaryWorkersMapping);
+		ancillaryWorkersMapping.setAncillaryWorkersMapping(null);
+
+		return ancillaryWorkersMapping;
+	}
+
+}

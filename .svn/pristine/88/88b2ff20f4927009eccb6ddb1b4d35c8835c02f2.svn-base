@@ -1,0 +1,57 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the sh_loom_mapping database table.
+ * 
+ */
+@Entity
+@Table(name="sh_loom_mapping")
+@NamedQuery(name="ShLoomMapping.findAll", query="SELECT s FROM ShLoomMapping s")
+public class ShLoomMapping implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idsh_loom_mapping")
+	private int idshLoomMapping;
+
+	@Column(name="loom_barcode")
+	private String loomBarcode;
+
+	//bi-directional many-to-one association to StakeHolderDetail
+	@ManyToOne
+	@JoinColumn(name="idstake_holder_details")
+	private StakeHolderDetail stakeHolderDetail;
+
+	public ShLoomMapping() {
+	}
+
+	public int getIdshLoomMapping() {
+		return this.idshLoomMapping;
+	}
+
+	public void setIdshLoomMapping(int idshLoomMapping) {
+		this.idshLoomMapping = idshLoomMapping;
+	}
+
+	public String getLoomBarcode() {
+		return this.loomBarcode;
+	}
+
+	public void setLoomBarcode(String loomBarcode) {
+		this.loomBarcode = loomBarcode;
+	}
+
+	public StakeHolderDetail getStakeHolderDetail() {
+		return this.stakeHolderDetail;
+	}
+
+	public void setStakeHolderDetail(StakeHolderDetail stakeHolderDetail) {
+		this.stakeHolderDetail = stakeHolderDetail;
+	}
+
+}

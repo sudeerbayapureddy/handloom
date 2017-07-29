@@ -1,0 +1,17 @@
+/**
+ * 
+ */
+package com.karvy.handloom.signup.dao.impl;
+
+import org.springframework.stereotype.Repository;
+
+import com.karvy.handloom.signup.dao.SignUPDAO;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Repository
+public class SignUPDAOImpl implements SignUPDAO{
+
+}

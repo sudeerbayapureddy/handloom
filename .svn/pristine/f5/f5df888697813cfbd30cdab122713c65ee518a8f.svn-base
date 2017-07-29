@@ -1,0 +1,117 @@
+/**
+ * 
+ */
+package com.karvy.handloom.ad.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.karvy.handloom.ad.dao.ADApprovalFlowDAO;
+import com.karvy.handloom.ad.service.ADApprovalFlowService;
+import com.karvy.handloom.admin.bean.ADApprovalBean;
+import com.karvy.handloom.admin.bean.AncillaryDetailsBean;
+import com.karvy.handloom.admin.bean.LoomDetailsBean;
+import com.karvy.handloom.admin.bean.RegistrationApprovalBean;
+import com.karvy.handloom.entity.AncillaryWorkersMapping;
+import com.karvy.handloom.entity.StakeHolder;
+import com.karvy.handloom.entity.StakeholderLoomMapping;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Service
+@Transactional
+public class ADApprovalFlowServiceImpl implements ADApprovalFlowService {
+
+	@Autowired
+	ADApprovalFlowDAO adApprovalFlowDAO;
+
+	@Override
+	public List<ADApprovalBean> getADGridDetails(String username, String roleName) {
+		List<ADApprovalBean> approvalGridList= new ArrayList<ADApprovalBean>();
+		if(roleName.equals("AD"))
+			approvalGridList = adApprovalFlowDAO.getStakeHolderDetailsByAD(username, roleName);
+		else if(roleName.equals("Stakeholder"))
+			approvalGridList = adApprovalFlowDAO.getStakeHolderDetailsByStakeHolder(username);
+		return approvalGridList;
+	}
+
+	@Override
+	public void registrationApproval(String userName, String roleName, String id,String decision) {
+		
+		StakeHolder stakeHolder = adApprovalFlowDAO.getStakeHolderById(id);
+		if(decision.equals("Approved")){
+			stakeHolder.setShApprovalStatus("Approved");
+		}
+		else if(decision.equals("Rejected")){
+			stakeHolder.setShApprovalStatus("Rejected");
+		}
+		adApprovalFlowDAO.updateStakeHolder(stakeHolder);
+	}
+	
+	@Override
+	public RegistrationApprovalBean registrationApprovalView(String id) {
+		
+		RegistrationApprovalBean registrationApprovalBean = new RegistrationApprovalBean();
+		List<LoomDetailsBean> loomDetailsBeanList = new ArrayList<LoomDetailsBean>();
+		List<AncillaryDetailsBean> ancillaryDetailsBeanList = new ArrayList<AncillaryDetailsBean>();
+		StakeHolder stakeHolder = adApprovalFlowDAO.getStakeHolderById(id);
+		registrationApprovalBean.setStakeHolderId(stakeHolder.getShId().toString());
+		registrationApprovalBean.setStakeHolderName(stakeHolder.getShName());
+		registrationApprovalBean.setStakeHolderAadharNo(stakeHolder.getShAadharNo().toString());
+		registrationApprovalBean.setStakeHolderType(stakeHolder.getShType());
+		registrationApprovalBean.setShDestrict(stakeHolder.getHsAddress().getHsDistrictsMaster().getDistrictName());
+		registrationApprovalBean.setShMandal(stakeHolder.getHsAddress().getHsMandalsMaster().getMandalName());
+		registrationApprovalBean.setShVillage(stakeHolder.getHsAddress().getHsVillagesMaster().getVillageName());
+		registrationApprovalBean.setShBankName(stakeHolder.getHsBankDetails().getHsBankMaster().getBankName());
+		registrationApprovalBean.setShBranchName(stakeHolder.getHsBankDetails().getBdBranchName());
+		registrationApprovalBean.setShAccountNo(stakeHolder.getHsBankDetails().getBdAccountNo().toString());
+		registrationApprovalBean.setStakeHolderRegNo(stakeHolder.getShRegNo());
+		
+		for (StakeholderLoomMapping shLoomMapingt : stakeHolder.getHsStakeholderLoomMappings()) {
+			LoomDetailsBean loomDetailsBean = new LoomDetailsBean();
+			loomDetailsBean.setLoomId(shLoomMapingt.getLoomDetails().getLdId().toString());
+			loomDetailsBean.setLoomWeaverName(shLoomMapingt.getLoomDetails().getLdWeaverName());
+			loomDetailsBean.setLoomWeaverAadharNo(shLoomMapingt.getLoomDetails().getLdWeaverAadharNo().toString());
+			loomDetailsBean.setLoomBarcode(shLoomMapingt.getLoomDetails().getLdBarcode().toString());
+			loomDetailsBean.setLoomLongitude(shLoomMapingt.getLoomDetails().getLdLongitude());
+			loomDetailsBean.setLoomYarnType(shLoomMapingt.getLoomDetails().getLdYarnType());
+			loomDetailsBean.setLoomDestrict(shLoomMapingt.getLoomDetails().getHsAddress().getHsDistrictsMaster().getDistrictName());
+			loomDetailsBean.setLoomMandal(shLoomMapingt.getLoomDetails().getHsAddress().getHsMandalsMaster().getMandalName());
+			loomDetailsBean.setLoomVillage(shLoomMapingt.getLoomDetails().getHsAddress().getHsVillagesMaster().getVillageName());
+			loomDetailsBean.setLoomBankName(shLoomMapingt.getLoomDetails().getHsBankDetails().getHsBankMaster().getBankName());
+			loomDetailsBean.setLoomBranchName(shLoomMapingt.getLoomDetails().getHsBankDetails().getBdBranchName());
+			loomDetailsBean.setLoomAccountNo(shLoomMapingt.getLoomDetails().getHsBankDetails().getBdAccountNo().toString());
+			
+			loomDetailsBeanList.add(loomDetailsBean);
+			
+			for (AncillaryWorkersMapping ancillaryWorkersMapping : shLoomMapingt.getLoomDetails().getAncillaryWorkersMapping()) {
+				AncillaryDetailsBean ancillaryDetailsBean = new AncillaryDetailsBean();
+				ancillaryDetailsBean.setAwId(ancillaryWorkersMapping.getHsAncillaryWorkerDetails().getAwdId().toString());
+				ancillaryDetailsBean.setAdName(ancillaryWorkersMapping.getHsAncillaryWorkerDetails().getAwdName());
+				ancillaryDetailsBean.setAdAadharNo(ancillaryWorkersMapping.getHsAncillaryWorkerDetails().getAwdAadharNo().toString());
+				ancillaryDetailsBean.setAdDesignation(ancillaryWorkersMapping.getHsAncillaryWorkerDetails().getAwdDesignation());
+				ancillaryDetailsBean.setAwBankName(ancillaryWorkersMapping.getHsAncillaryWorkerDetails().getHsBankDetails().getHsBankMaster().getBankName());
+				ancillaryDetailsBean.setAwBranchName(ancillaryWorkersMapping.getHsAncillaryWorkerDetails().getHsBankDetails().getBdBranchName());
+				ancillaryDetailsBean.setAwAccountNo(ancillaryWorkersMapping.getHsAncillaryWorkerDetails().getHsBankDetails().getBdAccountNo().toString());
+				ancillaryDetailsBean.setShDestrict(ancillaryWorkersMapping.getHsAncillaryWorkerDetails().getHsAddress().getHsDistrictsMaster().getDistrictName());
+				ancillaryDetailsBean.setShMandal(ancillaryWorkersMapping.getHsAncillaryWorkerDetails().getHsAddress().getHsMandalsMaster().getMandalName());
+				ancillaryDetailsBean.setShVillage(ancillaryWorkersMapping.getHsAncillaryWorkerDetails().getHsAddress().getHsVillagesMaster().getVillageName());
+				
+				ancillaryDetailsBeanList.add(ancillaryDetailsBean);
+			}
+			
+		}
+		registrationApprovalBean.setLoomDetailsBeanList(loomDetailsBeanList);
+		registrationApprovalBean.setAncillaryDetailsBean(ancillaryDetailsBeanList);
+		
+		return registrationApprovalBean;
+	}
+
+}

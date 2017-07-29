@@ -1,0 +1,123 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the yarn_indent_details database table.
+ * 
+ */
+@Entity
+@Table(name="yarn_indent_details")
+@NamedQuery(name="YarnIndentDetail.findAll", query="SELECT y FROM YarnIndentDetail y")
+public class YarnIndentDetail implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idyarn_indent_details")
+	private int idyarnIndentDetails;
+
+	private String createdby;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdon;
+
+	@Column(name="indent_qty")
+	private BigDecimal indentQty;
+
+	@Column(name="loom_barcode")
+	private String loomBarcode;
+
+	@Column(name="subsidy_eligibility_qty")
+	private BigDecimal subsidyEligibilityQty;
+
+	private String updatedby;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updatedon;
+
+	//bi-directional many-to-one association to YarnIndent
+	@ManyToOne
+	@JoinColumn(name="idyarn_indent")
+	private YarnIndent yarnIndent;
+
+	public YarnIndentDetail() {
+	}
+
+	public int getIdyarnIndentDetails() {
+		return this.idyarnIndentDetails;
+	}
+
+	public void setIdyarnIndentDetails(int idyarnIndentDetails) {
+		this.idyarnIndentDetails = idyarnIndentDetails;
+	}
+
+	public String getCreatedby() {
+		return this.createdby;
+	}
+
+	public void setCreatedby(String createdby) {
+		this.createdby = createdby;
+	}
+
+	public Date getCreatedon() {
+		return this.createdon;
+	}
+
+	public void setCreatedon(Date createdon) {
+		this.createdon = createdon;
+	}
+
+	public BigDecimal getIndentQty() {
+		return this.indentQty;
+	}
+
+	public void setIndentQty(BigDecimal indentQty) {
+		this.indentQty = indentQty;
+	}
+
+	public String getLoomBarcode() {
+		return this.loomBarcode;
+	}
+
+	public void setLoomBarcode(String loomBarcode) {
+		this.loomBarcode = loomBarcode;
+	}
+
+	public BigDecimal getSubsidyEligibilityQty() {
+		return this.subsidyEligibilityQty;
+	}
+
+	public void setSubsidyEligibilityQty(BigDecimal subsidyEligibilityQty) {
+		this.subsidyEligibilityQty = subsidyEligibilityQty;
+	}
+
+	public String getUpdatedby() {
+		return this.updatedby;
+	}
+
+	public void setUpdatedby(String updatedby) {
+		this.updatedby = updatedby;
+	}
+
+	public Date getUpdatedon() {
+		return this.updatedon;
+	}
+
+	public void setUpdatedon(Date updatedon) {
+		this.updatedon = updatedon;
+	}
+
+	public YarnIndent getYarnIndent() {
+		return this.yarnIndent;
+	}
+
+	public void setYarnIndent(YarnIndent yarnIndent) {
+		this.yarnIndent = yarnIndent;
+	}
+
+}

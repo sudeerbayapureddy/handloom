@@ -1,0 +1,17 @@
+/**
+ * 
+ */
+package com.karvy.handloom.stackholder.dao.impl;
+
+import org.springframework.stereotype.Repository;
+
+import com.karvy.handloom.stackholder.dao.StackHolderDAO;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Repository
+public class StackHolderDAOImpl implements StackHolderDAO{
+
+}

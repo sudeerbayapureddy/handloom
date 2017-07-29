@@ -1,0 +1,5 @@
+package com.karvy.handloom.admin.bean;
+
+public class UserBean {
+
+}

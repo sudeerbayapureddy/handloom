@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+        <title>Telangana Handlooms</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/bootstrap-datepicker.css" rel="stylesheet">
+        <link href="assets/css/core.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/icons.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/material-design-iconic-font.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/components.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/menu.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/responsive.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+        <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    </head>
+    <body class="fixed-left">
+        <div id="wrapper">
+            <div class="topbar">
+                <div class="topbar-left">
+                    <div class="text-center" id="logo">
+                        <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="" /></a>
+                    </div>
+                </div>
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="container">
+                        <div class="">
+                            <div class="pull-left">
+                                <button id="bars"  type="button" class="button-menu-mobile open-left">
+                                    <i  class="fa fa-bars"></i>
+                                </button>
+                                <span class="clearfix"></span>
+                            </div>
+                            <form class="navbar-form pull-left" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control search-bar" placeholder="Type here for search...">
+                                </div>
+                                <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
+                            </form>
+
+                            <ul class="nav navbar-nav navbar-right pull-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true">Welcome Admin&nbsp;&nbsp;<img src="assets/images/user.png" alt="user-img" class="img-circle"> </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="javascript:void(0)"><i class="zmdi zmdi-face"></i> Profile</a></li>
+                                        <li><a href="change-password.html"><i class="zmdi zmdi-lock-outline"></i> Change Password</a></li>
+                                        <li><a href="login.html"><i class="zmdi zmdi-power-setting"></i> Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="left side-menu">
+                <div class="sidebar-inner slimscrollleft">
+                    <div id="sidebar-menu">
+                        <ul>
+                            <li>
+                                <a href="index.html" class="waves-effect"><i class="fa fa-tachometer"></i><span> Dashboard </span></a>
+                            </li>
+
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-pencil-square-o"></i><span> Application Registration </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="app-registration.html">Application Submission</a></li>
+                                    <li><a href="reg-approvals.html">Application Approval</a></li>
+                                    <li><a href="#">Status</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-snowflake-o"></i> Material Request </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="yarn-indent.html">Yarn Indent</a></li>
+                                    <li><a href="yarn-receipt.html">Yarn Receipt</a></li>
+                                    <li><a href="product-info.html">Product Information</a></li>
+                                    <li><a href="subsidy-distribution.html">Payment</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-cog"></i><span> Setup &amp; Configuration </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Subsidy Slab</a></li>
+                                    <li><a href="#">Thrift Society</a></li>
+                                    <li><a href="#">Material Wastage</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-users"></i><span> Masters </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Applicant</a></li>
+                                    <li><a href="#">AD</a></li>
+                                    <li><a href="#">Bank Master</a></li>
+                                    <li><a href="#">Stake Holder Type</a></li>
+                                    <li><a href="#">Ancillary Type</a></li>
+                                    <li><a href="#">Barcode</a></li>
+                                </ul>
+                            </li>
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect"><i class="fa fa-wrench"></i><span> Utilities </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Role Creation</a></li>
+                                    <li><a href="#">User Creation</a></li>
+                                    <li><a href="#">Manage Roles</a></li>
+                                    <li><a href="#">Log Details</a></li>
+                                </ul>
+                            </li>
+                           <!-- <li>
+                                <a href="#" class="waves-effect"><i class="md md-event"></i><span> Calendar </span></a>
+                            </li>-->
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+                               
+            <div class="content-page">
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="pull-left page-title">Welcome to Telangana Handlooms !</h4>
+                                <ol class="breadcrumb pull-right">
+                                    <!--<li><a href="#">Telangana Handlooms</a></li>-->
+                                    <li class="active">Application Approval</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12">
+                               <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">Application Approvals</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                       <div class="row m-t-20">
+                                              <div class="col-md-12">
+                                                 <ul class="nav nav-tabs cat-tabs">
+                                                    <li class="active"><a href="#tab1" data-toggle="tab">Stake Holder</a></li>
+                                                    <li><a href="#tab2" data-toggle="tab">Loom Details</a></li>
+                                                    <li><a href="#tab3" data-toggle="tab">Ancillary Workers</a></li>
+                                                 </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active form-box" id="tab1">
+                                                        <div class="row m-t-20">
+                                              <div class="col-md-12">
+                                                 <form class="form-horizontal">
+                                                    <fieldset>
+                                                      <div class="row">
+                                                         <div class="col-md-6">
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Stakeholder Type</label>
+                                                              <div class="col-md-7">
+                                                                <select id="selectbasic" name="" class="form-control">
+                                                                  <option value="1">Master Weaver</option>
+                                                                  <option value="2">SHG</option>
+                                                                  <option value="3">Society</option>
+                                                                  <option value="4">Tisco</option>
+                                                                </select>
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Name</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Rajesh Kumar" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Aadhaar Number</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="234556786543" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Bank Account Number</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="67895432176" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Bank Name</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="HDFC Bank" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">IFSC Code</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="HDFC0001" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            
+                                                         </div>
+                                                         <div class="col-md-6">
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Address</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Uppal, Medchal District, Telangana." class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">District</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Medchal" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Mandal</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Uppal" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Village</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="Boduppal" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">Pincode</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="500039" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                              <label class="col-md-4 control-label" for="">No Of Looms</label>
+                                                              <div class="col-md-7">
+                                                                <input id="textinput" name="textinput" type="text" placeholder="2" class="form-control">
+                                                              </div>
+                                                            </div>
+                                                           
+                                                            
+                                                         </div>
+                                                      </div>
+                                                      <div class="row">
+                                                       <div class="col-md-12"><hr /></div>
+                                                       <div class="col-md-12">
+                                                         <div class="pull-right">
+                                                            <a class="btn btn-sm blue btnNext">Next</a>
+                                                         </div>
+                                                       </div>
+                                                      </div>
+                                                    </fieldset>
+                                                 </form>
+                                              </div>
+                                           </div>
+                                                    </div>
+                                                    <div class="tab-pane form-box" id="tab2">
+                                                      <div class="row m-t-20">
+                                                         <div class="col-md-6 col-md-offset-3">
+                                                             <form class="form-horizontal">
+                                                                <fieldset>
+                                                                  <div class="form-group">
+                                                                      <label class="col-md-4 control-label" for="">Loom Code</label>
+                                                                      <div class="col-md-7">
+                                                                        <select id="selectbasic" name="" class="form-control">
+                                                                          <option value="0">Select</option>
+                                                                          <option value="1">BA0001</option>
+                                                                          <option value="2">BA0002</option>
+                                                                          <option value="3">BA0003</option>
+                                                                          <option value="4">BA0004</option>
+                                                                        </select>
+                                                                      </div>
+                                                                   </div>
+                                                                   <div class="form-group">
+                                                                      <label class="col-md-4 control-label" for="">Yarn Type</label>
+                                                                      <div class="col-md-7">
+                                                                        <select id="selectbasic" name="" class="form-control">
+                                                                          <option value="0">Select</option>
+                                                                          <option value="1">Cotton</option>
+                                                                          <option value="2">Silk</option>
+                                                                          <option value="3">Polyster</option>
+                                                                          <option value="4">Linen</option>
+                                                                        </select>
+                                                                      </div>
+                                                                   </div>
+                                                                   <div class="form-group">
+                                                                      <label class="col-md-4 control-label" for="">&nbsp;</label>
+                                                                      <div class="col-md-7">
+                                                                        <button id="button1id" name="button1id" class="btn btn-sm pink">Submit</button>
+                                                                        <button id="button2id" name="button2id" class="btn btn-sm pink">Cancel</button>
+                                                                      </div>
+                                                                   </div>
+                                                                </fieldset>
+                                                             </form>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row m-t-10">
+                                                         <div class="col-md-8 col-md-offset-2">
+                                                            <div class="table table-responsive">
+                                                                <table class="table table-bordered m-b-0">
+                                                                    <thead>
+                                                                      <tr>
+                                                                        <th>Loom Code</th>
+                                                                        <th>Yarn Type</th>
+                                                                      </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                      <tr>
+                                                                        <td>BA0001</td>
+                                                                        <td>Cotton</td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                        <td>BA0002</td>
+                                                                        <td>Silk</td>
+                                                                      </tr>
+                                                                    </tbody>
+                                                                  </table>
+                                                             </div>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row">
+                                                          <div class="col-md-12"><hr /></div>
+                                                           <div class="col-md-12">
+                                                             <div class="pull-right">
+                                                                 <a class="btn btn-sm blue btnPrevious">Previous</a>
+                                                                 <a class="btn btn-sm blue btnNext">Next</a>
+                                                             </div>
+                                                           </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane form-box" id="tab3">
+                                                          <div class="col-md-12 m-t-20">
+                                                 <h4 class="bar-title">Loom: BA0001</h4>
+                                                 <hr class="colored">
+                                                 <div class="table table-responsive m-t-10">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                          <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Ancillary Workers</th>
+                                                            <th>Aadhaar Number</th>
+                                                            <th>Bank Account Number</th>
+                                                            <th>Bank Name</th>
+                                                            <th>IFSC Code</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr>
+                                                            <td>1</td>
+                                                            <td>Designer</td>
+                                                            <td>624567876595</td>
+                                                            <td>56743278961</td>
+                                                            <td>HDFC Bank</td>
+                                                            <td>HDFC12345</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>2</td>
+                                                            <td>Dyer</td>
+                                                            <td>624544657843</td>
+                                                            <td>76589432783</td>
+                                                            <td>IDBI Bank</td>
+                                                            <td>IDBI12345</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>3</td>
+                                                            <td>Worker</td>
+                                                            <td>624535879564</td>
+                                                            <td>65784389564</td>
+                                                            <td>HDFC Bank</td>
+                                                            <td>HDFC12345</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>4</td>
+                                                            <td>Cleaner</td>
+                                                            <td>624554345986</td>
+                                                            <td>65784389631</td>
+                                                            <td>ICICI Bank</td>
+                                                            <td>ICICI12345</td>
+                                                          </tr>
+                                                          
+                                                        </tbody>
+                                                      </table>
+                                                 </div>
+                                              </div>
+                                                          <div class="col-md-12 m-t-10">
+                                                 <h4 class="bar-title">Loom: BA0002</h4>
+                                                 <hr class="colored">
+                                                 <div class="table table-responsive m-t-10">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                          <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Ancillary Workers</th>
+                                                            <th>Aadhaar Number</th>
+                                                            <th>Bank Account Number</th>
+                                                            <th>Bank Name</th>
+                                                            <th>IFSC Code</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr>
+                                                            <td>1</td>
+                                                            <td>Designer</td>
+                                                            <td>724569785639</td>
+                                                            <td>65321345678</td>
+                                                            <td>HDFC Bank</td>
+                                                            <td>HDFC12345</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>2</td>
+                                                            <td>Dyer</td>
+                                                            <td>684543456348</td>
+                                                            <td>67547832765</td>
+                                                            <td>AXIS Bank</td>
+                                                            <td>AXIS12345</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>3</td>
+                                                            <td>Worker</td>
+                                                            <td>664568954537</td>
+                                                            <td>54600087542</td>
+                                                            <td>HDFC Bank</td>
+                                                            <td>HDFC12345</td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                 </div>
+                                              </div>
+                                                          <div class="col-md-12 m-t-10">
+                                                                  <form class="form-inline approval-box text-center">
+                                                                      <div class="form-group">
+                                                                        <label for="email">AD Name:</label>
+                                                                        <input type="text" class="form-control" placeholder="Ajay Raghav" id="">
+                                                                      </div>
+                                                                      <div class="form-group p-l-10">
+                                                                        <label for="pwd">Status:</label>
+                                                                        <select id="DropDownList1" name="" class="form-control">
+                                                                                  <option value="">Select</option>
+                                                                                  <option value="">Approve</option>
+                                                                                  <option value="1" data-toggle="modal" data-target="#myModal">Reject</option>
+                                                                                </select>
+                                                                      </div>
+                                                                      <button type="submit" class="btn btn-sm pink appr-btn p-l-10">Submit</button>
+                                                                    </form>
+                                                              </div>
+                                                            <div class="row">
+                                                               <div class="col-md-12"><hr /></div>
+                                                               <div class="col-md-12">
+                                                                 <div class="pull-right">
+                                                                    <a class="btn btn-sm blue btnPrevious">Previous</a>
+                                                                    <a class="btn btn-sm blue btnNext">Submit</a>
+                                                                 </div>
+                                                               </div>
+                                                            </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                              </div>
+                                           </div> 
+                                    </div>
+                               </div>
+                           </div>
+                        </div>
+                    </div>    
+                </div> 
+
+                <footer class="footer text-right">
+                    &copy; 2017 Telangana Handlooms. All rights reserved.
+                </footer>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Reject Reasons</h4>
+                      </div>
+                      <div class="modal-body">
+                         <div class="row">
+                            <div class="col-md-12">
+                               <form class="form-horizontal">
+                                    <fieldset>
+                                    <div class="form-group">
+                                      <div class="col-md-12">
+                                        <textarea class="form-control" id="textarea" rows="5" name="textarea"></textarea>
+                                      </div>
+                                    </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-sm pink">Submit</button>
+                        <button type="button" class="btn btn-sm pink" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            var resizefunc = [];
+        </script>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+         <script src="assets/js/modernizr.min.js"></script>
+        <script src="assets/js/detect.js"></script>
+        <script src="assets/js/fastclick.js"></script>
+        <script src="assets/js/jquery.slimscroll.js"></script>
+        <script src="assets/js/jquery.app.js"></script>
+        
+        <script src="assets/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript">
+            $(document).ready(function () {
+                $('#example1').datepicker({
+                    format: "dd/mm/yyyy"
+                });
+                $('#example2').datepicker({
+                    format: "dd/mm/yyyy"
+                }); 
+            });
+        </script>
+        <script type="text/javascript">
+        $(function () {
+            //Attach click event to your Dropdownlist
+            $("#DropDownList1").change(function () {
+                //Get the selected valu of dropdownlist
+                selection = $(this).val();
+                //If its one then show the dialog window. You can change this condition as per your need
+                if (selection == 1) {
+                    //Show the modal window
+                    $('#myModal').modal('show');
+                }
+            });
+        });
+    </script>
+        <script type="text/javascript">
+            $('.btnNext').click(function(){
+              $('.nav-tabs > .active').next('li').find('a').trigger('click');
+            });
+            $('.btnPrevious').click(function(){
+              $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+            });
+        </script>
+    </body>
+</html>

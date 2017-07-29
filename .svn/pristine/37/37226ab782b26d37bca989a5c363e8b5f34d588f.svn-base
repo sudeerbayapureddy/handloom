@@ -1,0 +1,274 @@
+/**
+ * 
+ */
+package com.karvy.handloom.stakeholder.service.impl;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.karvy.handloom.ad.service.ADApprovalFlowService;
+import com.karvy.handloom.admin.bean.RegistrationApprovalBean;
+import com.karvy.handloom.common.dto.IndentsDTO;
+import com.karvy.handloom.common.dto.LoomDetailsDTO;
+import com.karvy.handloom.common.dto.YarnIndentDetailDTO;
+import com.karvy.handloom.entity.Address;
+import com.karvy.handloom.entity.AncillaryWorkerDetail;
+import com.karvy.handloom.entity.BankDetails;
+import com.karvy.handloom.entity.BankMaster;
+import com.karvy.handloom.entity.DistrictsMaster;
+import com.karvy.handloom.entity.LoomDetails;
+import com.karvy.handloom.entity.MandalsMaster;
+import com.karvy.handloom.entity.StakeHolder;
+import com.karvy.handloom.entity.StakeholderLoomMapping;
+import com.karvy.handloom.entity.VillagesMaster;
+import com.karvy.handloom.entity.YarnIndent;
+import com.karvy.handloom.entity.YarnIndentDetail;
+import com.karvy.handloom.stakeholder.bean.AncillaryBean;
+import com.karvy.handloom.stakeholder.bean.AncillaryWorkerDetailsBean;
+import com.karvy.handloom.stakeholder.bean.StakeHolderBean;
+import com.karvy.handloom.stakeholder.dao.StakeHolderDAO;
+import com.karvy.handloom.stakeholder.service.StakeHolderService;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Service
+@Transactional
+public class StakeHolderServiceImpl implements StakeHolderService{
+
+	@Autowired
+	StakeHolderDAO stakeHolderDAO;
+	@Autowired
+	ADApprovalFlowService  approvalFlowService;
+	
+	@Override
+	public LoomDetailsDTO getLoomDetails(BigInteger loomId) {
+		// TODO Auto-generated method stub
+		LoomDetailsDTO loomDetails= stakeHolderDAO.getLoomDetails(loomId);
+		
+		 return loomDetails;
+	}
+	
+	@Override
+	public List<BankMaster> getBankMasterDetails() {
+		return stakeHolderDAO.getBankMasterDetails();
+	}
+
+	@Override
+	public List<DistrictsMaster> getDistrictDetails() {
+		return stakeHolderDAO.getDistrictDetails();
+	}
+
+	@Override
+	public List<MandalsMaster> getMandalDetails(int distId) {
+		return stakeHolderDAO.getMandalDetails(distId);
+	}
+
+	@Override
+	public List<VillagesMaster> getVillageDetails(int manId) {
+		return stakeHolderDAO.getVillageDetails(manId);
+	}
+
+	@Override
+	public LoomDetails getLoomDetailsByAadhar(String aadharNo) {
+		return stakeHolderDAO.getLoomDetailsByAadhar(aadharNo);
+	}
+
+	@Override
+	public RegistrationApprovalBean getStakeHolderDetails(Integer signUpId) {
+		// TODO Auto-generated method stub
+		//LoomDetailsDTO ldto= stakeHolderDAO.getStakeHolderDetails(signUpId);
+		
+		return approvalFlowService.registrationApprovalView(signUpId);
+	}
+
+	@Override
+	public List<IndentsDTO> getIndentList(Integer shId ,HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		String shdetails=(String) request.getSession().getAttribute("Sh_Id");
+		String details[]=shdetails.split("_");
+		List<YarnIndent> indent=stakeHolderDAO.getIndentList(shId);
+		List<IndentsDTO> dtos=new ArrayList<>();
+		IndentsDTO dto=null;
+		List<YarnIndentDetailDTO> indentdetailsdto=null;
+		YarnIndentDetailDTO detailDTO=null;
+		int tquantity=0;
+		for(YarnIndent obj:indent)
+		{
+			tquantity=0;
+			indentdetailsdto=new ArrayList<YarnIndentDetailDTO>();
+			dto=new IndentsDTO();
+			dto.setYarnSHId(obj.getYarnSHId());
+			dto.setYarnIndentDate(obj.getYarnIndentDate());
+			dto.setYarnIndentId(obj.getYarnIndentId());
+			dto.setShName(details[1]);
+			if(obj.getHsYarnIndentDetails()!=null)
+			{
+				for(YarnIndentDetail ydetails:obj.getHsYarnIndentDetails())
+				{
+					
+					detailDTO=new YarnIndentDetailDTO();
+					detailDTO.setYidLoomBarcode(ydetails.getYidLoomBarcode());
+					detailDTO.setYidQuantity(ydetails.getYidQuantity());
+					detailDTO.setYidSubsidyEligibilityQty(ydetails.getYidSubsidyEligibilityQty());
+					detailDTO.setYidId(ydetails.getYidId());
+					indentdetailsdto.add(detailDTO);
+					if(obj.getYarnIndentId().equals(ydetails.getHsYarnIndent().getYarnIndentId()))
+					tquantity+=detailDTO.getYidQuantity().intValue();
+				}
+				dto.setHsYarnIndentDetails(indentdetailsdto);
+				dto.setTotalQuantity(tquantity);
+			}
+			dtos.add(dto);
+		}
+		 return dtos;
+	}
+
+	@Override
+	public String saveIndentDetails(List<YarnIndentDetailDTO> indetsList,HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		String shdetails=(String) request.getSession().getAttribute("Sh_Id");
+		String details[]=shdetails.split("_");
+		Integer shId=Integer.parseInt(details[0]);
+		YarnIndent indent=new YarnIndent();
+		List<YarnIndentDetail> indetslist=new ArrayList<>();
+		YarnIndentDetail detail=null;
+		indent.setCreated_Date(new Date());
+		indent.setModified_Date(new Date());
+		indent.setCreated_By(details[1]);
+		indent.setModified_By(details[1]);
+		indent.setYarnIndentDate(new Date());
+		//indent.setYarnIndentNumber(yarnIndentNumber);
+		indent.setYarnSHId(shId);
+		for(YarnIndentDetailDTO ind: indetsList)
+		{
+			detail=new YarnIndentDetail();
+			detail.setCreated_Date(new Date());
+			detail.setModified_Date(new Date());
+			detail.setCreated_By(details[1]);
+			detail.setModified_By(details[1]);
+			detail.setYidLoomBarcode(ind.getYidLoomBarcode());
+			detail.setYidQuantity(ind.getYidQuantity());
+			detail.setYidSubsidyEligibilityQty(ind.getYidSubsidyEligibilityQty());
+			detail.setHsYarnIndent(indent);
+			indetslist.add(detail);
+		}
+		indent.setHsYarnIndentDetails(indetslist);
+		
+		
+		return stakeHolderDAO.saveIndentDetails(indent);
+	}
+
+	@Override
+	public List<YarnIndentDetailDTO> getYarnIndentDetail(String indentId, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		List<BigInteger> barCodes=new ArrayList<>();
+		List<String> yarnTypes=new ArrayList<>();
+		List<YarnIndentDetailDTO> yarnIndent= stakeHolderDAO.getYarnIndentDetail(indentId);
+		/*for(YarnIndentDetailDTO dto:yarnIndent){
+			BigInteger b=new BigInteger(dto.getYidLoomBarcode());
+			barCodes.add(b);
+		}
+		if(barCodes.size()>0){
+			yarnTypes=stakeHolderDAO.getYarnType(barCodes);
+		}
+		
+		
+		for(int i=0;i<yarnIndent.size();i++){
+			yarnIndent.get(i).setYarnType(yarnTypes.get(i));
+		}
+		*/
+		return yarnIndent;
+	}
+	
+	@Override
+	public String submitStakeHolderDetails(StakeHolderBean stakeHolderBean) {
+		String statusMsg = "S";
+		try{
+		List<AncillaryWorkerDetail> ancillaryWorkersList=new ArrayList<>();
+		StakeHolder stakeHolder=new StakeHolder();
+		/*stakeHolder.setHsAddress(details.getHsAddress());
+		stakeHolder.setHsBankDetails(details.getHsBankDetails());*/
+		stakeHolder.setShName(stakeHolderBean.getShName());
+		stakeHolder.setShAadharNo(stakeHolderBean.getShAadharNo());
+		stakeHolder.setShType(stakeHolderBean.getShType());
+		
+		Address add = new Address();
+		add.setAddress1(stakeHolderBean.getAddress1());
+		add.setAddressDistrictId(stakeHolderBean.getAddressDistrictId());
+		add.setAddressMandalId(stakeHolderBean.getAddressMandalId());
+		add.setAddressVillageId(stakeHolderBean.getAddressVillageId());
+		add.setPincode(stakeHolderBean.getPincode());
+		add.setAddressStateId(1);
+		
+		BankDetails bankDetails = new BankDetails();
+		bankDetails.setBdAccountNo(stakeHolderBean.getBdAccountNo());
+		bankDetails.setBdIFSCCode(stakeHolderBean.getBdIFSCCode());
+		bankDetails.setBdBankId(stakeHolderBean.getBdBankId());		
+		
+		List<StakeHolder> stkList = new ArrayList<StakeHolder>();
+		stkList.add(stakeHolder);
+		stakeHolder.setHsAddress(add);
+		stakeHolder.setHsBankDetails(bankDetails);
+		add.setHsStakeHolders(stkList);
+		bankDetails.setHsStakeHolders(stkList);
+		
+		
+		
+		Integer shId=stakeHolderDAO.submitStakeHolder(stakeHolder);
+		/*Integer add_id = stakeHolderDAO.submitAddressDetails(add);
+		Integer bank_id = stakeHolderDAO.submitBankdetails(bankDetails);*/
+		List<AncillaryBean> ancillaryList=stakeHolderBean.getAncillaryBean();
+		List<StakeholderLoomMapping> shlmList = new ArrayList<StakeholderLoomMapping>();
+		
+		
+		for(AncillaryBean bean:ancillaryList){
+			List<AncillaryWorkerDetailsBean> workersDetails=bean.getHsAncillaryWorkersMappings();
+			StakeholderLoomMapping stlm = new StakeholderLoomMapping();
+			stlm.setShId(shId);
+			stlm.setLdId(bean.getLdId());
+			shlmList.add(stlm);
+			for(AncillaryWorkerDetailsBean details:workersDetails){
+				AncillaryWorkerDetail worker=new AncillaryWorkerDetail();
+				worker.setAwdAadharNo(details.getAwdAadharNo());
+				worker.setAwdDesignation(details.getAwdDesignation());
+				worker.setAwdName(details.getAwdName());
+				worker.setLoomId(bean.getLdId());
+				bankDetails = new BankDetails();
+				bankDetails.setBdAccountNo(details.getBdAccountNo());
+				bankDetails.setBdIFSCCode(details.getBdIFSCCode());
+				bankDetails.setBdBranchName(details.getBdBranchName());
+				worker.setHsBankDetails(bankDetails);
+				List<AncillaryWorkerDetail> workersList=new ArrayList<>();
+				workersList.add(worker);
+				ancillaryWorkersList.add(worker);				
+				
+			}
+			
+			
+			
+		}
+			String msg = stakeHolderDAO.saveStakeLoomMapping(shlmList);
+			String status=stakeHolderDAO.saveAncillaryDetails(ancillaryWorkersList);
+		} catch(Exception e){
+			statusMsg = "F";
+			e.printStackTrace();
+		}
+		return statusMsg;
+	}
+
+	@Override
+	public StakeHolder checkAlreadyExist(String aadharNo) {
+		return stakeHolderDAO.checkAlreadyExist(aadharNo);
+	}
+
+}

@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package com.karvy.handloom.ad.dao;
+
+import java.util.List;
+
+import com.karvy.handloom.admin.bean.ADApprovalBean;
+import com.karvy.handloom.entity.LoomDetails;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+public interface ADApprovalFlowDAO {
+
+	List<ADApprovalBean> getADGridDetails(String username, String roleName);
+
+}

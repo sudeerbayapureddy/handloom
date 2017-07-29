@@ -1,0 +1,90 @@
+/**
+ * 
+ */
+package com.karvy.handloom.ad.dao.impl;
+
+import java.util.List;
+
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.karvy.handloom.ad.dao.ADApprovalFlowDAO;
+import com.karvy.handloom.admin.bean.ADApprovalBean;
+import com.karvy.handloom.common.util.HibernateUtil;
+import com.karvy.handloom.entity.Employee;
+import com.karvy.handloom.entity.StakeHolder;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Repository
+public class ADApprovalFlowDAOImpl implements ADApprovalFlowDAO {
+
+	@Autowired
+	HibernateUtil hibernateUtil;
+
+	private static final Logger logger = LoggerFactory.getLogger(ADApprovalFlowDAOImpl.class);
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ADApprovalBean> getStakeHolderDetailsByAD(String username, String roleName) {
+
+		return hibernateUtil.createEntityCriteriaByAlias(StakeHolder.class, "stakeHolder")
+				.createAlias("stakeHolder.hsAddress", "hsAddress")
+				.createAlias("hsAddress.hsDistrictsMaster", "hsDistrictsMaster")
+				.add(Restrictions.eq("hsDistrictsMaster.districtId",
+						hibernateUtil.createEntityCriteriaByAlias(Employee.class, "employee")
+								.createAlias("employee.address", "address").createAlias("employee.user", "user")
+								.createAlias("user.roles", "roles").add(Restrictions.eq("roles.roleName", roleName))
+								.add(Restrictions.eq("employee.emailId", username))
+								.setProjection(Projections.property("address.addressDistrictId")).uniqueResult()))
+				.setProjection(
+						Projections.projectionList().add(Projections.property("stakeHolder.shRegNo"), "requestNo")
+								.add(Projections.property("stakeHolder.shId"), "requestId")
+								.add(Projections.property("stakeHolder.shType"), "stakeholderType")
+								.add(Projections.property("stakeHolder.shName"), "stakeholderName")
+								.add(Projections.property("stakeHolder.created_Date"), "submitted")
+								.add(Projections.property("stakeHolder.modified_Date"), "approved")
+								.add(Projections.property("stakeHolder.created_By"), "submittedBy")
+								.add(Projections.property("stakeHolder.modified_By"), "approvedBy")
+								.add(Projections.property("stakeHolder.shApprovalStatus"), "status"))
+				.setResultTransformer(Transformers.aliasToBean(ADApprovalBean.class)).list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ADApprovalBean> getStakeHolderDetailsByStakeHolder(String username) {
+
+		return hibernateUtil.createEntityCriteriaByAlias(StakeHolder.class, "stakeHolder")
+				.createAlias("stakeHolder.user", "user").add(Restrictions.eq("user.userName", username))
+				.setProjection(
+						Projections.projectionList().add(Projections.property("stakeHolder.shRegNo"), "requestNo")
+								.add(Projections.property("stakeHolder.shId"), "requestId")
+								.add(Projections.property("stakeHolder.shType"), "stakeholderType")
+								.add(Projections.property("stakeHolder.shName"), "stakeholderName")
+								.add(Projections.property("stakeHolder.created_Date"), "submitted")
+								.add(Projections.property("stakeHolder.modified_Date"), "approved")
+								.add(Projections.property("stakeHolder.created_By"), "submittedBy")
+								.add(Projections.property("stakeHolder.modified_By"), "approvedBy")
+								.add(Projections.property("stakeHolder.shApprovalStatus"), "status"))
+				.setResultTransformer(Transformers.aliasToBean(ADApprovalBean.class)).list();
+	}
+
+	@Override
+	public StakeHolder getStakeHolderById(Integer id) {
+
+		return (StakeHolder) hibernateUtil.createEntityCriteriaByAlias(StakeHolder.class, "stakeHolder")
+				.add(Restrictions.eq("stakeHolder.shId", id)).uniqueResult();
+	}
+
+	@Override
+	public void updateStakeHolder(StakeHolder stakeHolder) {
+		hibernateUtil.update(stakeHolder);
+	}
+}

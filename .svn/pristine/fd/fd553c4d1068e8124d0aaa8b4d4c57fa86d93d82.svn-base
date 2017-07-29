@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+package com.karvy.handloom.stackholder.service.impl;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
+import com.karvy.handloom.stackholder.service.StackHolderService;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Service
+@Transactional
+public class StackHolderServiceImpl implements StackHolderService{
+
+}

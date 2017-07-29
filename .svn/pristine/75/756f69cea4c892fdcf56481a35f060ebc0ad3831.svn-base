@@ -1,0 +1,622 @@
+          <jsp:include page="../includes/includes.jsp"></jsp:include>   
+          
+          
+          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+<script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.js"></script> 
+          <link rel="stylesheet" type="text/css" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.css">
+          
+          <script>
+angular.module('app_resg', [])
+  .controller('registrationCont', ['$scope', '$http', function($scope,$http) { 
+	   $scope.stackHolderDetails={
+			   shType : '',  
+     		  shName : '',
+     		  shAadharNo : '',
+     		  hsAddress : $scope.address,
+     		 hsBankDetails : $scope.bankDetails		  
+	   }; 
+	   
+	   $scope.ancillaryList=[];
+	   
+	   
+	   $scope.address ={
+			   	address1 : '',  
+				pincode : '',
+				addressDistrictId : '',
+				addressMandalId : '',
+				addressVillageId: ''
+	   }
+	   
+	  $scope.bankDetails ={
+			   bdAccountNo :'',
+			   bdBankId : '',
+			   bdIFSCCode : ''
+	  }
+	   
+	   $scope.loomList=[{
+		
+	   }];
+	   
+	   
+	   $scope.loomList1=[];
+	  console.log($scope.stackHolderDetails);
+	  console.log($scope.loomList);
+     $scope.myFunc = function(stackHolderDetails) {   
+    	//console.log(stackHolderDetails);
+    	$scope.ancillaryList.push({
+    		name:$scope.stackHolderDetails.shName
+    	});
+    	
+     // alert($scope.stackHolderDetails.name);
+    }; 
+    
+    $scope.addLoom =function(){
+    	$scope.loomList.push({
+    		name:''
+    	});
+    }
+    
+    $scope.removeChoice = function() {
+   
+     if($scope.loomList.length!= 1){
+      var lastItem = $scope.loomList.length-1;
+      $scope.loomList.splice(lastItem);
+     }
+     
+     if($scope.loomList1.length!= 1){
+         var lastItem = $scope.loomList1.length-1;
+         $scope.loomList1.splice(lastItem);
+        }
+    };
+    
+    $scope.addLoomTable =function(value){
+    	
+    	if(value != null && value != ""){
+
+    	$scope.loomList1.push({    		
+    			name:value,
+    			type:'Cotton'    		 		
+    		
+    	});
+    	}
+    }
+    
+    $scope.addRow =function(){
+    	$scope.ancillaryList.push({
+    		name:''
+    	});
+    }
+    
+    
+    
+    $scope.getBankDetails= function()
+    {
+           $http({
+                   method: 'GET',
+                   url: 'getBankDetails',
+           }).then(function successCallback(response) {
+         	  //	console.log(response);
+        	  
+                  $scope.bankDetails = response.data; 
+        	 
+           
+           }, function errorCallback(response) {
+                 //return $scope.nextTab();
+           });
+    
+};
+
+$scope.getDistrictDetails= function()
+{
+       $http({
+               method: 'GET',
+               url: 'getDistrictDetails',
+       }).then(function successCallback(response) {
+     	  //	console.log(response);
+    	  
+              $scope.districtDetails = response.data; 
+    	 
+       
+       }, function errorCallback(response) {
+             //return $scope.nextTab();
+       });
+
+};
+
+$scope.getMandalDetails= function(districtId)
+{
+	 $http({
+               method: 'GET',
+               url: 'getMandalDetails?districtId='+districtId,
+       }).then(function successCallback(response) {
+     	  //	console.log(response);
+    	  
+              $scope.mandalDetails = response.data; 
+    	 
+       
+       }, function errorCallback(response) {
+             //return $scope.nextTab();
+       }); 
+
+};
+
+$scope.getVillageDetails= function(mandalId)
+{
+	 $http({
+               method: 'GET',
+               url: 'getVillageDetails?mandalId='+mandalId,
+       }).then(function successCallback(response) {
+     	  //	console.log(response);
+    	  
+              $scope.villageDetails = response.data; 
+    	 
+       
+       }, function errorCallback(response) {
+             //return $scope.nextTab();
+       }); 
+
+};
+
+$scope.getRegisteredDetails= function(aadharNo)
+{
+	 $http({
+               method: 'GET',
+               url: 'getRegisteredDetails?aadharNo='+aadharNo,
+       }).then(function successCallback(response) {
+     	  console.log(response.data);
+    	  if(response.data != null) {
+              $scope.stackHolderDetails.shName = response.data.ldWeaverName; 
+              $scope.stackHolderDetails.shAadharNo = response.data.ldWeaverAadharNo; 
+    	  } else {
+    		  $scope.stackHolderDetails.shName = ''; 
+              $scope.stackHolderDetails.shAadharNo = ''; 
+    	  }
+       }, function errorCallback(response) {
+             //return $scope.nextTab();
+       });  
+
+};
+
+    
+  }]);
+</script>
+                        
+            <div class="content-page">
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="pull-left page-title">Welcome to Telangana Handlooms !</h4>
+                                <ol class="breadcrumb pull-right">
+                                    <!--<li><a href="#">Telangana Handlooms</a></li>-->
+                                    <li class="active">Application Submission</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12">
+                               <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">Application Submission</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                         <div class="row">
+                                              <div class="col-md-12" ng-app="app_resg" ng-controller="registrationCont">
+                                                 <ul class="nav nav-tabs cat-tabs">
+                                                    <li class="active"><a href="#tab1" data-toggle="tab">Stake Holder</a></li>
+                                                    <li><a href="#tab2" data-toggle="tab">Loom Details</a></li>
+                                                    <li><a href="#tab3" data-toggle="tab">Ancillary Workers</a></li>
+                                                 </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active form-box" id="tab1">
+                                                        <div class="row m-t-20">
+                                                              <div class="col-md-12">
+                                                                 <form class="form-horizontal" name="basicDetails" ng-init="getBankDetails();getDistrictDetails();">
+                                                                    <fieldset>
+                                                                      <div class="row">
+                                                                         <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                              <label class="col-md-4 control-label" for="">Stakeholder Type</label>
+                                                                              <div class="col-md-7">
+                                                                                <select id="selectbasic" name="" class="form-control" ng-model="stackHolderDetails.shType">
+                                                                                   <option value="">Select Type</option>
+                                                                                  <option value="MasterWeaver">Master Weaver</option>
+                                                                                  <option value="SHG">SHG</option>
+                                                                                  <option value="Society">Society</option>
+                                                                                  <option value="Tisco">Tisco</option>
+                                                                                </select>
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                              <label class="col-md-4 control-label" for="">Name</label>
+                                                                              <div class="col-md-7">
+                                                                                <input id="textinput" name="textinput" type="text" placeholder="Rajesh Kumar" class="form-control" ng-model="stackHolderDetails.shName">
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                              <label class="col-md-4 control-label" for="">Aadhaar Number</label>
+                                                                              <div class="col-md-7">
+                                                                                <input id="textinput" name="textinput" type="text" placeholder="234556786543" class="form-control" ng-model="stackHolderDetails.shAadharNo" ng-blur="getRegisteredDetails(stackHolderDetails.shAadharNo);">
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                              <label class="col-md-4 control-label" for="">Bank Account Number</label>
+                                                                              <div class="col-md-7">
+                                                                                <input id="textinput" name="textinput" type="text" placeholder="67895432176" class="form-control" ng-model="stackHolderDetails.hsBankDetails.bdAccountNo">
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                              <label class="col-md-4 control-label" for="">Bank Name</label>
+                                                                             <!--  <div class="col-md-7">
+                                                                                <input id="textinput" name="textinput" type="text" placeholder="HDFC Bank" class="form-control" ng-model="stackHolderDetails.bankName">
+                                                                              </div> -->
+                                                                              
+                                                                              <div class="col-md-7">
+                                                                                <select id="district" name="" class="form-control" ng-model="stackHolderDetails.hsBankDetails.bdBankId">
+                                                                                  <option value="" selected="selected">Select Bank</option>
+                                                                                 <!--  <option value="1">ICICI Bank</option>
+                                                                                  <option value="2">HDFC Bank</option>
+                                                                                  <option value="3">Axis Bank</option>
+                                                                                  <option value="4">SBI</option> -->
+                                                                                  
+                                                                                  <option ng-repeat="bank in bankDetails" value="{{bank.bankId}}">{{bank.bankName}}</option>
+                                                                                </select>
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                              <label class="col-md-4 control-label" for="">IFSC Code</label>
+                                                                              <div class="col-md-7">
+                                                                                <input id="textinput" name="textinput" type="text" placeholder="HDFC0001" class="form-control" ng-model="stackHolderDetails.hsBankDetails.bdIFSCCode">
+                                                                              </div>
+                                                                            </div>
+                                                                            
+                                                                         </div>
+                                                                         <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                              <label class="col-md-4 control-label" for="">Address</label>
+                                                                              <div class="col-md-7">
+                                                                                <input id="textinput" name="textinput" type="text" placeholder="Uppal, Medchal District, Telangana." class="form-control" ng-model="stackHolderDetails.hsAddress.address1">
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                              <label class="col-md-4 control-label" for="">District</label>
+                                                                             <!--  <div class="col-md-7">
+                                                                                <input id="textinput" name="textinput" type="text" placeholder="Medchal" class="form-control" ng-model="stakeHolder.hsAddress.Address_District_Id"">
+                                                                              </div> -->
+                                                                              
+                                                                              
+                                                                              <div class="col-md-7">
+                                                                                <select id="district" name="" class="form-control" ng-model="stackHolderDetails.hsAddress.addressDistrictId" 
+                                                                                	ng-change="getMandalDetails(stackHolderDetails.hsAddress.addressDistrictId)">
+                                                                                  <option value="" selected="selected">Select District</option>                                                                                  
+                                                                                  
+                                                                                 <!--  <option value="1">Hyderabad</option>
+                                                                                  <option value="2">RangaReddy</option>
+                                                                                  <option value="3">Warangal</option>
+                                                                                  <option value="4">Kammam</option> -->
+                                                                                  
+                                                                                  <option ng-repeat="dist in districtDetails" value="{{dist.districtId}}">{{dist.districtName}}</option>
+                                                                                </select>
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                              <label class="col-md-4 control-label" for="">Mandal</label>
+                                                                              <!-- <div class="col-md-7">
+                                                                                <input id="textinput" name="textinput" type="text" placeholder="Uppal" class="form-control" ng-model="stakeHolder.hsAddress.Address_Mandal_Id">
+                                                                              </div> -->
+                                                                              
+                                                                              <div class="col-md-7">
+                                                                                <select id="mandal" name="" class="form-control" ng-model="stackHolderDetails.hsAddress.addressMandalId" 
+                                                                                	ng-change="getVillageDetails(stackHolderDetails.hsAddress.addressMandalId)">
+                                                                                  <option value="" selected="selected">Select Mandal</option>
+                                                                                	
+                                                                                	<option ng-repeat="mandal in mandalDetails" value="{{mandal.mandalId}}">{{mandal.mandalName}}</option>
+                                                                                
+                                                                                 <!--  <option value="5">Kukatpally</option>
+                                                                                  <option value="6">Balanagar</option>
+                                                                                  <option value="7">Uppal</option>
+                                                                                  <option value="8">Kapra</option> -->
+                                                                                </select>
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                              <label class="col-md-4 control-label" for="">Village</label>
+                                                                            <!--   <div class="col-md-7">
+                                                                                <input id="textinput" name="textinput" type="text" placeholder="Boduppal" class="form-control" ng-model="stakeHolder.hsAddress.addressVillageId">
+                                                                              </div> -->
+                                                                              
+                                                                              <div class="col-md-7">
+                                                                                <select id="village" name="" class="form-control" ng-model="stackHolderDetails.hsAddress.addressVillageId">
+                                                                                  <option value="" selected="selected">Select Village</option>
+                                                                                  
+                                                                                  <option ng-repeat="village in villageDetails" value="{{village.villageId}}">{{village.villageName}}</option>
+                                                                                  
+                                                                                 <!--  <option value="9">Kukatpally</option>
+                                                                                  <option value="10">Jeedimetla</option>
+                                                                                  <option value="11">Lingampally</option>
+                                                                                  <option value="12">Patancheru</option> -->
+                                                                                </select>
+                                                                              </div>
+                                                                            </div>
+                                                                            
+                                                                            <div class="form-group">
+                                                                              <label class="col-md-4 control-label" for="">Pincode</label>
+                                                                              <div class="col-md-7">
+                                                                                <input id="textinput" name="textinput" type="text" placeholder="500039" class="form-control" ng-model="stackHolderDetails.hsAddress.pincode">
+                                                                              </div>
+                                                                            </div>
+                                                                            
+                                                                            <!-- <div class="form-group">
+                                                                              <label class="col-md-4 control-label" for="">No Of Looms</label>
+                                                                              <div class="col-md-7">
+                                                                                <input id="textinput" name="textinput" type="text" placeholder="2" class="form-control">
+                                                                              </div>
+                                                                            </div> -->
+                                                                           
+                                                                            
+                                                                         </div>
+                                                                      </div>
+                                                                      <div class="row">
+                                                                       <div class="col-md-12"><hr /></div>
+                                                                       <div class="col-md-12">
+                                                                         <div class="pull-right">
+                                                                            <a class="btn btn-sm blue btnNext" ng-click="myFunc(stackHolderDetails)">Next</a>
+                                                                         </div>
+                                                                       </div>
+                                                                      </div>
+                                                                    </fieldset>
+                                                                 </form>
+                                                              </div>
+                                                         </div>
+                                                    </div>
+                                                    <div class="tab-pane form-box" id="tab2">
+                                                      <div class="row m-t-20">
+                                                         <div class="col-md-6 col-md-offset-3">
+                                                             <form class="form-horizontal">
+                                                             <div class="col-md-1 p-l-0"><button ng-click="addLoom()"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i></a></div>
+                                                                <fieldset data-ng-repeat="loom in loomList">
+                                                                   <div class="add_loomcode">
+                                                                       <div class="form-group">
+                                                                      <label class="col-md-4 control-label" for="">Loom Bar Code</label>
+                                                                      <div class="col-md-7">
+                                                                        <input type="text" class="form-control" id="" ng-model="loom.name" ng-blur="addLoomTable(loom.name)"/>
+                                                                      </div>
+                                                                       <div class="col-md-1 p-l-0"><button ng-click="removeChoice()"><i class="fa fa-minus-circle fa-lg"></i></a></div>
+                                                                   </div>
+                                                                   </div>
+                                                                  <!--  <div class="form-group">
+                                                                      <label class="col-md-4 control-label" for="">Yarn Type</label>
+                                                                      <div class="col-md-7">
+                                                                        <select id="selectbasic" name="" class="form-control">
+                                                                          <option value="0">Select</option>
+                                                                          <option value="1">Cotton</option>
+                                                                          <option value="2">Silk</option>
+                                                                          <option value="3">Polyster</option>
+                                                                          <option value="4">Linen</option>
+                                                                        </select>
+                                                                      </div>
+                                                                   </div> -->
+                                                                   <!-- <div class="form-group">
+                                                                      <label class="col-md-4 control-label" for="">&nbsp;</label>
+                                                                      <div class="col-md-7">
+                                                                        <button id="button1id" name="button1id" class="btn btn-sm pink">Submit</button>
+                                                                        <button id="button2id" name="button2id" class="btn btn-sm pink">Cancel</button>
+                                                                      </div>
+                                                                   </div> -->
+                                                                </fieldset>
+                                                             </form>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row m-t-10">
+                                                         <div class="col-md-8 col-md-offset-2">
+                                                            <div class="table table-responsive">
+                                                                <table class="table table-bordered m-b-0">
+                                                                    <thead>
+                                                                      <tr>
+                                                                        <th>Loom Code</th>
+                                                                        <th>Yarn Type</th>
+                                                                      </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                      <tr ng-repeat="loom in loomList1">
+                                                                        <td>{{loom.name}}</td>
+                                                                      	<td>{{loom.type}}</td>
+                                                                      </tr>
+                                                                     
+                                                                    </tbody>
+                                                                  </table>
+                                                             </div>
+                                                         </div>
+                                                      </div>
+                                                       <div class="row">
+                                                          <div class="col-md-12"><hr /></div>
+                                                           <div class="col-md-12">
+                                                             <div class="pull-right">
+                                                                 <a class="btn btn-sm blue btnPrevious">Previous</a>
+                                                                 <a class="btn btn-sm blue btnNext">Next</a>
+                                                             </div>
+                                                           </div>
+                                                        </div> 
+                                                    </div>
+                                                    <div class="tab-pane form-box" id="tab3">
+                                                          <div class="col-md-12 m-t-20" ng-repeat="loom in loomList1">
+                                                                 <h4 class="bar-title">{{loom.name}}</h4> 
+                                                                 <hr class="colored">
+                                                                 <div class="table table-responsive m-t-10">
+                                                                  <table class="table table-bordered">
+                                                                        <thead>
+                                                                          <tr>
+                                                                            <th>S.No.</th>
+                                                                            <th>Name</th>
+                                                                            <th>Ancillary Workers</th>
+                                                                            <th>Aadhaar Number</th>
+                                                                            <th>Bank Account Number</th>
+                                                                            <th>Bank Name</th>
+                                                                            <th>IFSC Code</th>
+                                                                            <th>&nbsp;</th>
+                                                                          </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                          <tr ng-repeat="ancillary in ancillaryList">
+                                                                            <td>1</td>
+                                                                            <td>{{ancillary.name}}</td>
+                                                                            <td>Designer</td>
+                                                                            <td>624567876595</td>
+                                                                            <td>56743278961</td>
+                                                                            <td>HDFC Bank</td>
+                                                                            <td>HDFC12345</td>
+                                                                            <td width="90px"><button ng-click="addRow()"><i class="fa fa-plus-circle fa-lg"></i></a></td>
+                                                                          </tr>
+                                                                          
+                                                                        </tbody>
+                                                                      </table>
+                                                            	
+                                                               <!--      <table class="table table-bordered">
+                                                                        <thead>
+                                                                          <tr>
+                                                                            <th>S.No.</th>
+                                                                            <th>Name</th>
+                                                                            <th>Ancillary Workers</th>
+                                                                            <th>Aadhaar Number</th>
+                                                                            <th>Bank Account Number</th>
+                                                                            <th>Bank Name</th>
+                                                                            <th>IFSC Code</th>
+                                                                            <th>&nbsp;</th>
+                                                                          </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                          <tr>
+                                                                            <td>1</td>
+                                                                            <td>R. Venkata Ram</td>
+                                                                            <td>Designer</td>
+                                                                            <td>624567876595</td>
+                                                                            <td>56743278961</td>
+                                                                            <td>HDFC Bank</td>
+                                                                            <td>HDFC12345</td>
+                                                                            <td width="90px"><a class="btn btn-success btn-small btn-sm" href="#"><i class="fa fa-plus-circle fa-lg"></i></a></td>
+                                                                          </tr>
+                                                                           <tr>
+                                                                            <td>2</td>
+                                                                            <td><input type="text" id="" class="form-control" /></td>
+                                                                            <td><input type="text" id="" class="form-control" /></td>
+                                                                            <td><input type="text" id="" class="form-control" /></td>
+                                                                            <td><input type="text" id="" class="form-control" /></td>
+                                                                            <td><input type="text" id="" class="form-control" /></td>
+                                                                            <td><input type="text" id="" class="form-control" /></td>
+                                                                            <td><a class="btn btn-sm btn-small  btn-warning" href="#"><i class="fa fa-pencil fa-lg"></i></a><a class="m-l-5 btn btn-sm btn-small btn-danger" href="#"><i class="fa fa-minus-circle fa-lg"></i></a>
+                                                                            </td>
+                                                                          </tr>
+                                                                        </tbody>
+                                                                      </table> -->
+                                                                 </div>
+                                                              </div>
+                                                <!--           <div class="col-md-12 m-t-10">
+                                                                 <h4 class="bar-title">Loom: BA0002</h4>
+                                                                 <hr class="colored">
+                                                                 <div class="table table-responsive m-t-10">
+                                                                    <table class="table table-bordered">
+                                                                        <thead>
+                                                                          <tr>
+                                                                            <th>S.No.</th>
+                                                                            <th>Name</th>
+                                                                            <th>Ancillary Workers</th>
+                                                                            <th>Aadhaar Number</th>
+                                                                            <th>Bank Account Number</th>
+                                                                            <th>Bank Name</th>
+                                                                            <th>IFSC Code</th>
+                                                                            <th>&nbsp;</th>
+                                                                          </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                          <tr>
+                                                                            <td>1</td>
+                                                                            <td>S. Ramesh Chandra</td>
+                                                                            <td>Designer</td>
+                                                                            <td>724569785639</td>
+                                                                            <td>65321345678</td>
+                                                                            <td>HDFC Bank</td>
+                                                                            <td>HDFC12345</td>
+                                                                            <td width="90px"><a class="btn btn-success btn-small btn-sm" href="#"><i class="fa fa-plus-circle fa-lg"></i></a></td>
+                                                                          </tr>
+                                                                           <tr>
+                                                                            <td>2</td>
+                                                                            <td><input type="text" id="" class="form-control" /></td>
+                                                                            <td><input type="text" id="" class="form-control" /></td>
+                                                                            <td><input type="text" id="" class="form-control" /></td>
+                                                                            <td><input type="text" id="" class="form-control" /></td>
+                                                                            <td><input type="text" id="" class="form-control" /></td>
+                                                                            <td><input type="text" id="" class="form-control" /></td>
+                                                                            <td><a class="btn btn-sm btn-small  btn-warning" href="#"><i class="fa fa-pencil fa-lg"></i></a><a class="m-l-5 btn btn-sm btn-small btn-danger" href="#"><i class="fa fa-minus-circle fa-lg"></i></a>
+                                                                            </td>
+                                                                          </tr>
+                                                                        </tbody>
+                                                                      </table>
+                                                                 </div>
+                                                              </div> -->
+                                                           <div class="row">
+                                                               <div class="col-md-12"><hr /></div>
+                                                               <div class="col-md-12">
+                                                                 <div class="pull-right">
+                                                                    <a class="btn btn-sm blue btnPrevious">Previous</a>
+                                                                    <a class="btn btn-sm blue btnNext">Submit</a>
+                                                                 </div>
+                                                               </div>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                           </div>
+                                    </div>
+                               </div>
+                           </div>
+                        </div>
+                    </div>    
+                </div> 
+
+              
+            </div>
+      
+        
+        <script>
+            var resizefunc = [];
+        </script>      
+		<script type="text/javascript">
+            $(document).ready(function () {
+                $('#example1').datepicker({
+                    format: "dd/mm/yyyy"
+                });
+                $('#example2').datepicker({
+                    format: "dd/mm/yyyy"
+                }); 
+            });
+        </script>
+        <script type="text/javascript">
+            $('.btnNext').click(function(){
+              $('.nav-tabs > .active').next('li').find('a').trigger('click');
+            });
+            $('.btnPrevious').click(function(){
+              $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+            });
+        </script>
+        <script>
+           $(document).ready(function() {
+				var max_fields      = 30; //maximum input boxes allowed
+				var wrapper         = $(".add_loomcode"); //Fields wrapper
+				var add_button      = $(".add_field_button"); //Add button ID
+				
+				var x = 1; //initlal text box count
+				$(add_button).click(function(e){ //on add input button click
+					e.preventDefault();
+					if(x < max_fields){ //max input box allowed
+						x++; //text box increment
+						$(wrapper).append('<div class="form-group" id="div1"><label class="col-md-4 control-label">&nbsp;</label><div class="col-md-7"><input type="text" class="form-control" name="mytext[]"/></div><div class="col-md-1 p-l-0"><a href="#" class="btn btn-danger btn-sm btn-small remove_field"><i class="fa fa-minus-circle fa-lg"></i></a></div></div>'); //add input box
+					}
+				});
+				
+				$(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+					e.preventDefault(); $("#div1").remove(); x--;
+				})
+			});
+        </script>   

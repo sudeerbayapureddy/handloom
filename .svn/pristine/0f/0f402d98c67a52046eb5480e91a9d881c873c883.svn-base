@@ -1,0 +1,18 @@
+/**
+ * 
+ */
+package com.karvy.handloom.stakeholder.dao;
+
+import java.math.BigInteger;
+
+import com.karvy.handloom.entity.LoomDetails;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+public interface StakeHolderDAO {
+
+	LoomDetails getLoomDetails(BigInteger loomId);
+
+}

@@ -1,0 +1,67 @@
+/**
+ * 
+ */
+package com.karvy.handloom.stakeholder.service.impl;
+
+import java.math.BigInteger;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.karvy.handloom.common.dto.LoomDetailsDTO;
+import com.karvy.handloom.entity.BankMaster;
+import com.karvy.handloom.entity.DistrictsMaster;
+import com.karvy.handloom.entity.LoomDetails;
+import com.karvy.handloom.entity.MandalsMaster;
+import com.karvy.handloom.entity.VillagesMaster;
+import com.karvy.handloom.stakeholder.dao.StakeHolderDAO;
+import com.karvy.handloom.stakeholder.service.StakeHolderService;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Service
+@Transactional
+public class StakeHolderServiceImpl implements StakeHolderService{
+
+	@Autowired
+	StakeHolderDAO stakeHolderDAO;
+	
+	@Override
+	public LoomDetailsDTO getLoomDetails(BigInteger loomId) {
+		// TODO Auto-generated method stub
+		LoomDetailsDTO loomDetails= stakeHolderDAO.getLoomDetails(loomId);
+		
+		 return loomDetails;
+	}
+	
+	@Override
+	public List<BankMaster> getBankMasterDetails() {
+		return stakeHolderDAO.getBankMasterDetails();
+	}
+
+	@Override
+	public List<DistrictsMaster> getDistrictDetails() {
+		return stakeHolderDAO.getDistrictDetails();
+	}
+
+	@Override
+	public List<MandalsMaster> getMandalDetails(int distId) {
+		return stakeHolderDAO.getMandalDetails(distId);
+	}
+
+	@Override
+	public List<VillagesMaster> getVillageDetails(int manId) {
+		return stakeHolderDAO.getVillageDetails(manId);
+	}
+
+	@Override
+	public LoomDetails getLoomDetailsByAadhar(String aadharNo) {
+		return stakeHolderDAO.getLoomDetailsByAadhar(aadharNo);
+	}
+
+}

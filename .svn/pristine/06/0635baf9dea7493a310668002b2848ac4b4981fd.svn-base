@@ -1,0 +1,166 @@
+package com.karvy.handloom.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the hs_bank_branches database table.
+ * 
+ */
+@Entity
+@Table(name="hs_bank_branches")
+@NamedQuery(name="BankBranch.findAll", query="SELECT h FROM BankBranch h")
+public class BankBranch implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int branch_Id;
+
+	private String brach_MICR_Code;
+
+	@Lob
+	private String branch_Address;
+
+	private String branch_Code;
+
+	private String branch_IFSC_Code;
+
+	private String branch_Name;
+
+	private String created_By;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created_Date;
+
+	private String modifed_By;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date modified_Date;
+
+	//bi-directional many-to-one association to HsBankMaster
+	@ManyToOne
+	@JoinColumn(name="Branch_Bank_Id")
+	private BankMaster hsBankMaster;
+
+	//bi-directional many-to-one association to HsStakeHolder
+	@OneToMany(mappedBy="hsBankBranch")
+	private List<StakeHolder> hsStakeHolders;
+
+	public BankBranch() {
+	}
+
+	public int getBranch_Id() {
+		return this.branch_Id;
+	}
+
+	public void setBranch_Id(int branch_Id) {
+		this.branch_Id = branch_Id;
+	}
+
+	public String getBrach_MICR_Code() {
+		return this.brach_MICR_Code;
+	}
+
+	public void setBrach_MICR_Code(String brach_MICR_Code) {
+		this.brach_MICR_Code = brach_MICR_Code;
+	}
+
+	public String getBranch_Address() {
+		return this.branch_Address;
+	}
+
+	public void setBranch_Address(String branch_Address) {
+		this.branch_Address = branch_Address;
+	}
+
+	public String getBranch_Code() {
+		return this.branch_Code;
+	}
+
+	public void setBranch_Code(String branch_Code) {
+		this.branch_Code = branch_Code;
+	}
+
+	public String getBranch_IFSC_Code() {
+		return this.branch_IFSC_Code;
+	}
+
+	public void setBranch_IFSC_Code(String branch_IFSC_Code) {
+		this.branch_IFSC_Code = branch_IFSC_Code;
+	}
+
+	public String getBranch_Name() {
+		return this.branch_Name;
+	}
+
+	public void setBranch_Name(String branch_Name) {
+		this.branch_Name = branch_Name;
+	}
+
+	public String getCreated_By() {
+		return this.created_By;
+	}
+
+	public void setCreated_By(String created_By) {
+		this.created_By = created_By;
+	}
+
+	public Date getCreated_Date() {
+		return this.created_Date;
+	}
+
+	public void setCreated_Date(Date created_Date) {
+		this.created_Date = created_Date;
+	}
+
+	public String getModifed_By() {
+		return this.modifed_By;
+	}
+
+	public void setModifed_By(String modifed_By) {
+		this.modifed_By = modifed_By;
+	}
+
+	public Date getModified_Date() {
+		return this.modified_Date;
+	}
+
+	public void setModified_Date(Date modified_Date) {
+		this.modified_Date = modified_Date;
+	}
+
+	public BankMaster getHsBankMaster() {
+		return this.hsBankMaster;
+	}
+
+	public void setHsBankMaster(BankMaster hsBankMaster) {
+		this.hsBankMaster = hsBankMaster;
+	}
+
+	public List<StakeHolder> getHsStakeHolders() {
+		return this.hsStakeHolders;
+	}
+
+	public void setHsStakeHolders(List<StakeHolder> hsStakeHolders) {
+		this.hsStakeHolders = hsStakeHolders;
+	}
+
+	public StakeHolder addHsStakeHolder(StakeHolder hsStakeHolder) {
+		getHsStakeHolders().add(hsStakeHolder);
+		hsStakeHolder.setHsBankBranch(this);
+
+		return hsStakeHolder;
+	}
+
+	public StakeHolder removeHsStakeHolder(StakeHolder hsStakeHolder) {
+		getHsStakeHolders().remove(hsStakeHolder);
+		hsStakeHolder.setHsBankBranch(null);
+
+		return hsStakeHolder;
+	}
+
+}

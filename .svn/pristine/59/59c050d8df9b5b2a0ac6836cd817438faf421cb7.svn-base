@@ -1,0 +1,17 @@
+/**
+ * 
+ */
+package com.karvy.handloom.ad.dao.impl;
+
+import org.springframework.stereotype.Repository;
+
+import com.karvy.handloom.ad.dao.ADApprovalFlowDAO;
+
+/**
+ * @author sateesh.jangam
+ *
+ */
+@Repository
+public class ADApprovalFlowDAOImpl implements ADApprovalFlowDAO{
+
+}
